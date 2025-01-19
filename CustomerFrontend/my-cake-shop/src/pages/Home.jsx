@@ -7,12 +7,13 @@ import CakeList from '../components/CakeList';
 import BakeryWebsite from './BakeryWebsite ';
 import AboutUs from './AboutUsHome';
 import Footer from '../components/Footer';
+import CreateBlogPost from '../components/BlogForm';
 
 const HeroSection = () => {
   return (
     <div>
       <Navbar />
-    <div className="relative h-[90vh]">
+    <div className="relative h-[90vh] ">
     
       {/* Background Image */}
       <div 
@@ -28,18 +29,18 @@ const HeroSection = () => {
       />
       
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/20" />
+      <div className="absolute inset-0 bg-black/20 " />
       
       {/* Content */}
-      <div className="relative h-full flex flex-col items-center justify-center text-center text-white px-4">
+      <div className="relative h-full flex cormorant-garamond-semibold flex-col items-center justify-center text-center text-white px-4">
         {/* Made with love text */}
-        <div className="text-sm tracking-[0.3em] uppercase mb-6">
+        <div className="text-sm tracking-[0.3em] text-[#8B7355] mt-40 uppercase mb-6">
           Made with love
         </div>
         
         {/* Main Title */}
-        <h1 className="text-6xl md:text-7xl font-serif tracking-wider mb-8">
-          SWEET CREAM
+        <h1 className="text-6xl md:text-7xl  cormorant-garamond-semibold font-serif tracking-wider mb-8">
+          ROYAL BAKE HOUSE
         </h1>
         
         {/* Shop Now Button */}
@@ -53,6 +54,7 @@ const HeroSection = () => {
     <CakeList/>
     <BakeryWebsite/>
     <AboutUs/>
+    <CreateBlogPost/>
     <Footer/>
    
  

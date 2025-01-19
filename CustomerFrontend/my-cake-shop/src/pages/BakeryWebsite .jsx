@@ -1,7 +1,7 @@
 import React from "react";
 import coverImage from '../assets/cake4.jpg';
 import left from '../assets/left.jpg';
-import right from '../assets/right.jpg';
+import right from '../assets/right2.jpg';
 
 const BakeryWebsite = () => {
   return (

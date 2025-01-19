@@ -61,7 +61,7 @@ const RestaurantShowcase = () => {
       <div className="px-4 py-16">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-gray-400 tracking-widest uppercase text-sm mb-4">
+          <h2 className=" tracking-widest uppercase text-sm mb-4 text-[#8B7355] ">
             OUR TEAM
           </h2>
           <h1 className="text-white text-5xl font-serif  cormorant-garamond-medium">
@@ -88,7 +88,7 @@ const RestaurantShowcase = () => {
                   <h3 className="text-white text-xl font-medium mb-2">
                     {member.name}
                   </h3>
-                  <p className="text-gray-400 text-sm">
+                  <p className=" text-sm text-[#8B7355] ">
                     {member.position}
                   </p>
                 </div>

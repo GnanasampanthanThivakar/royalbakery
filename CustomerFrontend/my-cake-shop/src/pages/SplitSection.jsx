@@ -9,7 +9,7 @@ const SplitSection = () => {
           {/* Left Section - FLAVOUR */}
           <div className="text-center px-4 sm:px-6">
             <div className="mb-4">
-              <span className="text-xs tracking-[0.3em] text-gray-400">SWEET</span>
+              <span className="text-xs tracking-[0.3em] text-[#8B7355]">SWEET</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-6 tracking-wider">
               FLAVOUR
@@ -21,7 +21,7 @@ const SplitSection = () => {
               Lorem Ipsum Is That It Has Making It Look Like 
               Readable English Dummy.
             </p>
-            <button className="border border-gray-700 hover:border-gray-500 px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest transition-colors duration-300">
+            <button className="border border-[#8B7355]  hover:border-[#7A6548] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest transition-colors duration-300">
               READ MORE
             </button>
           </div>
@@ -38,7 +38,7 @@ const SplitSection = () => {
           {/* Right Section - PROCESS */}
           <div className="text-center px-4 sm:px-6">
             <div className="mb-4">
-              <span className="text-xs tracking-[0.3em] text-gray-400">SWEET</span>
+              <span className="text-xs tracking-[0.3em] text-[#8B7355] ">SWEET</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-6 tracking-wider">
               PROCESS
@@ -50,7 +50,7 @@ const SplitSection = () => {
               Lorem Ipsum Is That It Has Making It Look Like 
               Readable English Dummy.
             </p>
-            <button className="border border-gray-700 hover:border-gray-500 px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest transition-colors duration-300">
+            <button className="border border-[#8B7355]  hover:border-[#7A6548] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest transition-colors duration-300">
               READ MORE
             </button>
           </div>

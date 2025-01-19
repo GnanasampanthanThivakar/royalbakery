@@ -7,10 +7,12 @@ import AboutUsHome  from '../pages/AboutUsHome';
 import Footer from '../components/Footer';
 const AboutUs = () => {
   return (
+    <div>
+       <Navbar/>
     <div className="w-full h-full bg-[#171718]">
-        <Navbar/>
+       
       {/* Hero Section */}
-      <div className="relative h-96 w-full">
+      <div className="relative h-96 sm:mt-30 md:mt-40 w-full">
         <div className="absolute inset-0">
           <img
             src={coverImage}
@@ -21,13 +23,11 @@ const AboutUs = () => {
         </div>
         
         <div className="relative h-full flex flex-col justify-center items-center text-white">
-          <h2 className="text-2xl tracking-widest mb-12">ABOUT</h2>
+          
           <h1 className="text-4xl md:text-5xl font-serif text-center max-w-2xl mb-6">
-            MODERN & UNIQUE CAKE DESIGN
+           About Us
           </h1>
-          <p className="text-lg text-gray-200">
-            Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit, Sed Eiusmod
-          </p>
+         
         </div>
       </div>
 
@@ -71,6 +71,7 @@ const AboutUs = () => {
       </div>
       <AboutUsHome/>
       <Footer/>
+    </div>
     </div>
   );
 };

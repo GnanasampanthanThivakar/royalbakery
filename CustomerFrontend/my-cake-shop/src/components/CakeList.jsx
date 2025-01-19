@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ShoppingCart, Loader2, ArrowRight } from "lucide-react";
+import { ShoppingCart, Loader2, ArrowRight, ShoppingBag } from "lucide-react";
 
 const CakeList = () => {
   const [cakes, setCakes] = useState([]);
+  const [visibleCakes, setVisibleCakes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -12,8 +13,10 @@ const CakeList = () => {
   useEffect(() => {
     const fetchCakes = async () => {
       try {
+        setLoading(true);
         const response = await axios.get("http://localhost:5000/api/customer/cakes");
-        setCakes(response.data.slice(0, 4)); // Show 4 featured cakes
+        setCakes(response.data);
+        setVisibleCakes(response.data.slice(0, 4)); // Display only the first 4 cakes initially
         setError(null);
       } catch (error) {
         console.error("Error fetching cakes:", error);
@@ -26,88 +29,117 @@ const CakeList = () => {
     fetchCakes();
   }, []);
 
-  const handleAddToCart = (cakeId) => {
-    localStorage.setItem("cakeId", cakeId);
-    navigate("/checkout");
+  const handleAddToCart = (cake) => {
+    const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const updatedCart = [...currentCart, cake];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    const notification = document.createElement("div");
+    notification.className =
+      "fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-md shadow-lg transform transition-transform duration-500 ease-out";
+    notification.textContent = `${cake.name} added to cart!`;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.style.transform = "translateX(120%)";
+      setTimeout(() => document.body.removeChild(notification), 500);
+    }, 2000);
+  };
+
+  const handleShowMore = () => {
+    navigate("/shop"); // Redirect to the cake page
+  };
+
+  const handleGoToCart = () => {
+    navigate("/cart");
   };
 
   return (
-    <section className="bg-[#171718] py-24">
-      <div className="container mx-auto px-6">
+    <section className="bg-[#171718] py-24 min-h-screen">
+      <div className="container mx-auto px-4 sm:px-6">
         {/* Elegant Header */}
         <div className="text-center mb-20">
-          <span className=" cormorant-garamond-medium  inline-block text-sm tracking-[0.3em] uppercase text-[#8B7355] mb-4 px-4 py-2 border border-[#8B7355]/20">
-            Featured Collection
+          <span className="inline-block cormorant-garamond-semibold text-sm tracking-[0.3em] uppercase text-[#8B7355] mb-4 px-4 py-2 border border-[#8B7355]/20">
+            Our Collection
           </span>
-          <h2 className="text-5xl font-serif tracking-wider text-white mt-6 mb-4 cormorant-garamond-medium  ">
-            Popular Cakes
+          <h2 className="text-4xl cormorant-garamond-semibold uppercase sm:text-5xl font-serif tracking-wider text-white mt-6 mb-4">
+            Exquisite Cakes
           </h2>
           <div className="w-24 h-px bg-[#8B7355] mx-auto"></div>
+        </div>
+
+        {/* Cart Button */}
+        <div className="fixed top-4 right-4 z-50">
+          <button
+            onClick={handleGoToCart}
+            className="bg-[#8B7355] hover:bg-[#9B8365] text-white p-3 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105"
+          >
+            <ShoppingBag className="w-6 h-6" />
+          </button>
         </div>
 
         {/* Content */}
         {loading ? (
           <div className="flex justify-center items-center h-40">
-            <Loader2 className="w-6 h-6 text-[#8B7355] animate-spin" />
+            <Loader2 className="w-8 h-8 text-[#8B7355] animate-spin" />
           </div>
         ) : error ? (
-          <div className="text-center text-gray-400">{error}</div>
+          <div className="text-center text-gray-400 py-10">{error}</div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {cakes.map((cake) => (
-              <div
-                key={cake._id}
-                className="group relative bg-[#1C1C1D] p-4"
-              >
-                {/* Image Container */}
-                <div className="relative aspect-[4/5] mb-6 overflow-hidden">
-                  <img
-                    src={cake.photo}
-                    alt={cake.name}
-                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
-                  
-                  {/* Price Tag */}
-                  <div className="absolute top-4 right-4 bg-[#171718]/80 backdrop-blur-sm px-4 py-2">
-                    <span className="text-[#8B7355] font-serif">$24.99</span>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {visibleCakes.map((cake) => (
+                <div
+                  key={cake._id}
+                  className="group relative bg-[#1C1C1D] p-4 rounded-lg transform transition-all duration-300 hover:shadow-xl"
+                >
+                  {/* Image Container */}
+                  <div className="relative aspect-[4/5] mb-6 overflow-hidden rounded-lg cormorant-garamond-semibold">
+                    <img
+                      src={cake.photo}
+                      alt={cake.name}
+                      className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
+                    <div className="absolute top-4 right-4 bg-[#171718]/80 backdrop-blur-sm px-4 py-2 rounded-md">
+                      <span className="text-[#8B7355] font-serif">${cake.price}</span>
+                    </div>
+                    <button
+                      onClick={() => handleAddToCart(cake)}
+                      className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    >
+                      <span className="bg-[#8B7355] text-white px-6 py-3 rounded-md flex items-center space-x-3 transform -translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#9B8365]">
+                        <ShoppingCart className="w-4 h-4" />
+                        <span className="text-sm uppercase tracking-wider">Add to Cart</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                      </span>
+                    </button>
                   </div>
 
-                  {/* Hover Action */}
-                  <button
-                    onClick={() => handleAddToCart(cake._id)}
-                    className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  >
-                    <span className="bg-[#8B7355] text-white px-6 py-3 flex items-center space-x-3 transform -translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                      <ShoppingCart className="w-4 h-4" />
-                      <span className="text-sm uppercase tracking-wider">Add to Cart</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                    </span>
-                  </button>
+                  {/* Details */}
+                  <div className="text-center px-2">
+                    <h3 className="font-serif text-xl cormorant-garamond-semibold mb-3 text-white group-hover:text-[#8B7355] transition-colors duration-300">
+                      {cake.name}
+                    </h3>
+                    <p className="text-sm cormorant-garamond-semibold  text-gray-400 line-clamp-2 mb-6">
+                      {cake.description}
+                    </p>
+                    <div className="w-12 h-px bg-[#8B7355]/30 mx-auto"></div>
+                  </div>
                 </div>
+              ))}
+            </div>
 
-                {/* Details */}
-                <div className="text-center px-2">
-                  <h3 className="font-serif text-xl mb-3 text-white group-hover:text-[#8B7355] transition-colors duration-300">
-                    {cake.name}
-                  </h3>
-                  <p className="text-sm text-gray-400 line-clamp-2 mb-6">
-                    {cake.description}
-                  </p>
-                  <div className="w-12 h-px bg-[#8B7355]/30 mx-auto"></div>
-                </div>
-              </div>
-            ))}
-          </div>
+            <div className="text-center mt-10">
+              <button
+                onClick={handleShowMore}
+                className="bg-[#8B7355] text-white px-8 py-3 rounded-md shadow-md hover:bg-[#9B8365] transition-all duration-300"
+              >
+                Show More Cakes
+              </button>
+            </div>
+          </>
         )}
-
-        {/* View All Link */}
-        <div className="text-center mt-16">
-          <button className="inline-flex items-center text-[#8B7355] hover:text-white transition-colors duration-300 group">
-            <span className="text-sm uppercase tracking-widest">View All Cakes</span>
-            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
-        </div>
       </div>
     </section>
   );
