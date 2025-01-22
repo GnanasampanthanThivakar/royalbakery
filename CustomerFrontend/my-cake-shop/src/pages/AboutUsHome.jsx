@@ -48,11 +48,11 @@ const RestaurantShowcase = () => {
           <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
             <span className="block text-white text-6xl font-serif mb-4">"</span>
             <p className="text-white text-2xl md:text-3xl font-serif italic mb-6  cormorant-garamond-medium">
-              On The Other Hand, We Denounce With Indignation And Dislike Men Who Are So And Demoralized The.
+            Our cakes are freshly made with the finest ingredients, perfect for any event. Whether it's a birthday or a simple treat, indulge in our mouthwatering cakes!
             </p>
-            <p className="text-white text-lg uppercase tracking-wider">
-              — Milin Yande
-            </p>
+            {/* <p className="text-white text-lg uppercase tracking-wider">
+              — Royal Bakery
+            </p> */}
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import coverImage from '../assets/cake4.jpg';
-import left from '../assets/left.jpg';
+import left from '../assets/left3.jpg';
 import right from '../assets/right2.jpg';
 
 const BakeryWebsite = () => {
@@ -8,7 +8,7 @@ const BakeryWebsite = () => {
     <div className="bg-[#171718] text-center min-h-screen flex flex-col items-center justify-center p-4 md:p-8 lg:p-12">
       {/* Header Text */}
       <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-8 cormorant-garamond-medium">
-        GET YOUR OWN <br /> SLICE OF HEAVEN
+      SWEETNESS THAT  <br /> MELTS YOUR HEART
       </h1>
 
       {/* Main Image Container */}
@@ -25,10 +25,10 @@ const BakeryWebsite = () => {
       {/* Content Section */}
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
         <h1 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-8 mt-10 cormorant-garamond-medium">
-          GET YOUR OWN <br /> SLICE OF HEAVEN
+        FRESHLY BAKED <br /> JUST FOR YOU
         </h1>
         <div className="max-w-4xl mx-auto">
-          <p className="text-white mb-6 text-sm md:text-base jost-font">
+          <p className="text-white mb-6 text-sm md:text-base jost-font ">
           Discover the authentic flavors of Jaffna Chavachery, 
           where tradition meets taste in every bite. Nestled in the heart of Jaffna, our recipes are crafted with love, inspired by the rich culinary heritage of the region.
           </p>

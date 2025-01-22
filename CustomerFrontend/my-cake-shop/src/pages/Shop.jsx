@@ -93,7 +93,7 @@ const Shop = () => {
           <span className="inline-block text-sm tracking-[0.3em] uppercase text-[#8B7355] mb-4 px-4 py-2 border border-[#8B7355]/20">
             Our Collection
           </span>
-          <h2 className="text-4xl sm:text-5xl font-serif tracking-wider text-white mt-6 mb-4">
+          <h2 className="text-4xl sm:text-5xl cormorant-garamond-semibold tracking-wider uppercase text-white mt-6 mb-4">
             Exquisite Cakes
           </h2>
           <div className="w-24 h-px bg-[#8B7355] mx-auto"></div>
@@ -182,9 +182,9 @@ const Shop = () => {
                 className="space-y-2 text-white"
               >
                 <Radio value="all" className="text-white block">All Prices</Radio>
-                <Radio value="under25" className="text-white block">Under $25</Radio>
-                <Radio value="25to50" className="text-white block">$25 - $50</Radio>
-                <Radio value="over50" className="text-white block">Over $50</Radio>
+                <Radio value="under25" className="text-white block">Under 25</Radio>
+                <Radio value="25to50" className="text-white block">25 - 50</Radio>
+                <Radio value="over50" className="text-white block">Over 50</Radio>
               </Radio.Group>
             </div>
           </div>
@@ -216,7 +216,7 @@ const Shop = () => {
                     
                     {/* Price Tag */}
                     <div className="absolute top-4 right-4 bg-[#171718]/80 backdrop-blur-sm px-4 py-2 rounded-md">
-                      <span className="text-[#8B7355] font-serif">${cake.price}</span>
+                      <span className="text-[#8B7355] font-serif">{cake.price} LKR</span>
                     </div>
 
                     {/* Add to Cart Button */}

@@ -1,5 +1,5 @@
 import React from 'react';
-import coverImage from '../assets/cover3.jpg';
+import coverImage from '../assets/about.jpg';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
@@ -11,17 +11,17 @@ const ContactUs = () => {
       <div className="w-full  h-full bg-[#171718] ">
         {/* Hero Section */}
         <div className="relative h-96 sm:mt-30 md:mt-40 w-full ">
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 ">
             <img
               src={coverImage}
               alt="Contact us cover"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/50"></div>
+            <div className="absolute inset-0 bg-black/20"></div>
           </div>
           
           <div className="relative h-full flex flex-col justify-center items-center text-white">
-            <h1 className="text-4xl md:text-5xl font-serif text-center max-w-2xl mb-6">
+            <h1 className="text-4xl md:text-6xl uppercase cormorant-garamond-medium text-center max-w-2xl mb-6">
               Contact Us
             </h1>
           </div>
@@ -64,12 +64,18 @@ const ContactUs = () => {
                     className="w-full p-3 bg-[#171718] border border-gray-700 rounded-md text-white focus:outline-none focus:border-[#8B7355]"
                   ></textarea>
                 </div>
-                <button
+                {/* <button
                   type="submit"
                   className="w-full py-3 bg-[#8B7355] text-white rounded-md hover:bg-[#7A6548] transition-colors duration-300"
                 >
                   Send Message
-                </button>
+                </button> */}
+                <button type="submit" className="relative w-full overflow-hidden border border-[#8B7355] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest group">
+              <span className="relative z-10 transition-colors text-white  jost-font  duration-300 group-hover:text-white">
+                SEND US
+              </span>
+              <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </button>
               </form>
             </div>
 
@@ -79,7 +85,7 @@ const ContactUs = () => {
                 <h3 className="text-3xl font-serif mb-6 text-white cormorant-garamond-medium">
                   Get in Touch
                 </h3>
-                <p className="text-gray-400 cormorant-garamond-medium mb-8">
+                <p className="text-gray-400  mb-8">
                   We'd love to hear from you. Whether you have a question about our products,
                   want to place a custom order, or need assistance, we're here to help.
                 </p>
@@ -89,7 +95,7 @@ const ContactUs = () => {
                 <div className="flex items-center space-x-4 text-gray-400">
                   <MapPin size={24} className="text-[#8B7355]" />
                   <div>
-                    <h4 className="text-white font-semibold mb-1">Visit Us</h4>
+                    <h4 className="text-white  mb-1 cormorant-garamond-medium ">Visit Us</h4>
                     <p>123 Chava Street, NY 10001</p>
                   </div>
                 </div>
@@ -97,7 +103,7 @@ const ContactUs = () => {
                 <div className="flex items-center space-x-4 text-gray-400">
                   <Phone size={24} className="text-[#8B7355]" />
                   <div>
-                    <h4 className="text-white font-semibold mb-1">Call Us</h4>
+                    <h4 className="text-white cormorant-garamond-medium mb-1">Call Us</h4>
                     <p>(+1) 718-999-0779</p>
                   </div>
                 </div>
@@ -105,7 +111,7 @@ const ContactUs = () => {
                 <div className="flex items-center space-x-4 text-gray-400">
                   <Mail size={24} className="text-[#8B7355]" />
                   <div>
-                    <h4 className="text-white font-semibold mb-1">Email Us</h4>
+                    <h4 className="text-white cormorant-garamond-medium  mb-1">Email Us</h4>
                     <p>info@royalbakery.com</p>
                   </div>
                 </div>
@@ -113,7 +119,7 @@ const ContactUs = () => {
                 <div className="flex items-center space-x-4 text-gray-400">
                   <Clock size={24} className="text-[#8B7355]" />
                   <div>
-                    <h4 className="text-white font-semibold mb-1">Opening Hours</h4>
+                    <h4 className="text-white cormorant-garamond-medium  mb-1">Opening Hours</h4>
                     <p>Monday - Sunday: 7:00 AM - 7:00 PM</p>
                   </div>
                 </div>

@@ -34,13 +34,13 @@ const HeroSection = () => {
       {/* Content */}
       <div className="relative h-full flex cormorant-garamond-semibold flex-col items-center justify-center text-center text-white px-4">
         {/* Made with love text */}
-        <div className="text-sm tracking-[0.3em] text-[#8B7355] mt-40 uppercase mb-6">
+        <div className="text-sm tracking-[0.3em] cormorant-garamond-semibold  text-[#8B7355] mt-40 uppercase mb-3">
           Made with love
         </div>
         
         {/* Main Title */}
-        <h1 className="text-6xl md:text-7xl  cormorant-garamond-semibold font-serif tracking-wider mb-8">
-          ROYAL BAKE HOUSE
+        <h1 className="text-6xl md:text-7xl uppercase cormorant-garamond-semibold font-serif tracking-wider mb-8">
+        Taste the Magic of <br />  Fresh Bakes
         </h1>
         
         {/* Shop Now Button */}
@@ -54,7 +54,7 @@ const HeroSection = () => {
     <CakeList/>
     <BakeryWebsite/>
     <AboutUs/>
-    <CreateBlogPost/>
+    {/* <CreateBlogPost/> */}
     <Footer/>
    
  

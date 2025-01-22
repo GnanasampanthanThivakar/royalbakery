@@ -74,3 +74,10 @@
   font-weight: 400;
   font-style: normal;
 }
+
+p{
+  font-family: "Jost", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}

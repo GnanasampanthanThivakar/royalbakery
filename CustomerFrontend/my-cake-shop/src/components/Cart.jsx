@@ -3,15 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Trash2, ArrowLeft, ArrowRight, ShoppingBag, Minus, Plus } from "lucide-react";
 
 const Cart = () => {
-  const [cart, setCart] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setLoading(true);
+  const [cart, setCart] = useState(() => {
     const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-    // Combine duplicate items and add quantity
-    const consolidatedCart = cartData.reduce((acc, item) => {
+    return cartData.reduce((acc, item) => {
       const existingItem = acc.find((i) => i._id === item._id);
       if (existingItem) {
         existingItem.quantity += 1;
@@ -20,61 +14,45 @@ const Cart = () => {
       }
       return acc;
     }, []);
-    setCart(consolidatedCart);
-    setLoading(false);
-  }, []);
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Update local storage on cart changes
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const handleCheckout = () => {
-    localStorage.setItem("cart", JSON.stringify(cart));
     navigate("/checkout");
   };
 
   const updateQuantity = (index, change) => {
     const updatedCart = [...cart];
     const newQuantity = updatedCart[index].quantity + change;
-    
+
     if (newQuantity < 1) {
       handleRemoveFromCart(index);
       return;
     }
-    
+
     updatedCart[index].quantity = newQuantity;
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const handleRemoveFromCart = (index) => {
     const updatedCart = [...cart];
     updatedCart.splice(index, 1);
     setCart(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const calculateTotal = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
-  const calculateSubtotal = () => {
-    return calculateTotal().toFixed(2);
-  };
-
-  const calculateTax = () => {
-    return (calculateTotal() * 0.1).toFixed(2); // 10% tax
-  };
-
-  const calculateGrandTotal = () => {
-    return (parseFloat(calculateSubtotal()) + parseFloat(calculateTax())).toFixed(2);
-  };
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-[#171718] flex items-center justify-center">
-        <div className="animate-spin text-[#8B7355]">
-          <ShoppingBag className="w-8 h-8" />
-        </div>
-      </div>
-    );
-  }
+  const calculateSubtotal = () => calculateTotal().toFixed(2);
+  const calculateTax = () => (calculateTotal() * 0.1).toFixed(2); // 10% tax
+  const calculateGrandTotal = () =>
+    (parseFloat(calculateSubtotal()) + parseFloat(calculateTax())).toFixed(2);
 
   if (cart.length === 0) {
     return (
@@ -128,7 +106,7 @@ const Cart = () => {
                   <p className="text-gray-400 text-sm mb-4">{item.description}</p>
                   <div className="flex items-center justify-center sm:justify-start space-x-4">
                     <span className="text-[#8B7355] font-serif">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      {(item.price * item.quantity).toFixed(2)}LKR
                     </span>
                     <div className="flex items-center space-x-2">
                       <button
@@ -164,16 +142,16 @@ const Cart = () => {
               <div className="space-y-4">
                 <div className="flex justify-between text-gray-400">
                   <span>Subtotal</span>
-                  <span>${calculateSubtotal()}</span>
+                  <span>{calculateSubtotal()} LKR</span>
                 </div>
                 <div className="flex justify-between text-gray-400">
                   <span>Tax (10%)</span>
-                  <span>${calculateTax()}</span>
+                  <span>{calculateTax()} LKR</span>
                 </div>
                 <div className="h-px bg-[#8B7355]/20"></div>
                 <div className="flex justify-between text-white font-serif">
                   <span>Total</span>
-                  <span>${calculateGrandTotal()}</span>
+                  <span>{calculateGrandTotal()} LKR</span>
                 </div>
                 <button
                   onClick={handleCheckout}

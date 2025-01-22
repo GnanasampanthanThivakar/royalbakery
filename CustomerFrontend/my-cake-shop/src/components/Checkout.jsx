@@ -99,7 +99,7 @@ const Checkout = () => {
                 />
                 <div className="flex-grow">
                   <h4 className="text-xl font-serif text-white mb-2">{cake.name}</h4>
-                  <p className="text-[#8B7355] mb-2">${cake.price.toFixed(2)}</p>
+                  <p className="text-[#8B7355] mb-2">{cake.price.toFixed(2)} LKR</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <input
                       type="text"

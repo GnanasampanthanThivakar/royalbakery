@@ -16,7 +16,7 @@ const BlogDetail = () => {
         const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
         
         // Log the response status
-        console.log('Response status:', response.status);
+        console.log('Response status:', response);
         
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

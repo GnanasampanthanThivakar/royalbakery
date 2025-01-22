@@ -1,9 +1,10 @@
 // src/components/BlogList.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Loader2, ArrowRight, CalendarDays, Clock } from "lucide-react";
+import { Loader2, ArrowRight, CalendarDays } from "lucide-react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import heroImage from '../assets/dish.jpg';  // Adjust the path accordingly
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
@@ -41,12 +42,31 @@ const BlogList = () => {
   return (
     <div className="min-h-screen mt-40 bg-[#171718]">
       <Navbar/>
+      
+      {/* Hero Section */}
+      <div className="relative h-96 sm:mt-30 md:mt-40 w-full">
+        <div className="absolute inset-0">
+          <img
+            src={heroImage}
+            alt="Hero"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/20"></div>
+        </div>
+        
+        <div className="relative h-full flex flex-col justify-center items-center text-white">
+          <h1 className="text-4xl md:text-6xl cormorant-garamond-medium uppercase text-center max-w-2xl mb-6">
+            Our Blog
+          </h1>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="text-center py-20">
         <span className="inline-block text-sm tracking-[0.3em] uppercase cormorant-garamond-regular  text-[#8B7355] mb-4 px-4 py-2 border border-[#8B7355]/20">
           Our Stories
         </span>
-        <h1 className=" cormorant-garamond-semibold  uppercase text-4xl sm:text-5xl font-serif tracking-wider text-white mt-6 mb-4">
+        <h1 className="cormorant-garamond-semibold uppercase text-4xl sm:text-5xl font-serif tracking-wider text-white mt-6 mb-4">
           Latest Blog Posts
         </h1>
         <div className="w-24 h-px bg-[#8B7355] mx-auto"></div>
@@ -105,6 +125,7 @@ const BlogList = () => {
           </div>
         )}
       </div>
+
       <Footer/>
     </div>
   );

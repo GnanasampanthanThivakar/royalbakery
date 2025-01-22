@@ -16,8 +16,10 @@ router.post("/create", upload.single("photo"), createBlogPost);
 router.get("/", getAllBlogPosts);
 
 // Route to get a specific blog post by ID
-router.get('/api/blogs/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
+    console.log("id : ",req.params.id );
+    
     const blog = await Blog.findById(req.params.id); // Example database query
     res.json(blog);
   } catch (error) {

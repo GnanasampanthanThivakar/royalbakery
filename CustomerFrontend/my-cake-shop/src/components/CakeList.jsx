@@ -62,13 +62,13 @@ const CakeList = () => {
           <span className="inline-block cormorant-garamond-semibold text-sm tracking-[0.3em] uppercase text-[#8B7355] mb-4 px-4 py-2 border border-[#8B7355]/20">
             Our Collection
           </span>
-          <h2 className="text-4xl cormorant-garamond-semibold uppercase sm:text-5xl font-serif tracking-wider text-white mt-6 mb-4">
+          <h2 className="text-4xl cormorant-garamond-semibold uppercase sm:text-5xl  tracking-wider text-white mt-6 mb-4">
             Exquisite Cakes
           </h2>
           <div className="w-24 h-px bg-[#8B7355] mx-auto"></div>
         </div>
 
-        {/* Cart Button */}
+        {/* Cart Button
         <div className="fixed top-4 right-4 z-50">
           <button
             onClick={handleGoToCart}
@@ -76,7 +76,7 @@ const CakeList = () => {
           >
             <ShoppingBag className="w-6 h-6" />
           </button>
-        </div>
+        </div> */}
 
         {/* Content */}
         {loading ? (
@@ -102,7 +102,7 @@ const CakeList = () => {
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
                     <div className="absolute top-4 right-4 bg-[#171718]/80 backdrop-blur-sm px-4 py-2 rounded-md">
-                      <span className="text-[#8B7355] font-serif">${cake.price}</span>
+                      <span className="text-[#8B7355] font-serif">{cake.price} LKR </span>
                     </div>
                     <button
                       onClick={() => handleAddToCart(cake)}
@@ -131,12 +131,12 @@ const CakeList = () => {
             </div>
 
             <div className="text-center mt-10">
-              <button
-                onClick={handleShowMore}
-                className="bg-[#8B7355] text-white px-8 py-3 rounded-md shadow-md hover:bg-[#9B8365] transition-all duration-300"
-              >
-                Show More Cakes
-              </button>
+              <button  onClick={handleShowMore} className="relative overflow-hidden border border-[#8B7355] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest group">
+              <span className="relative z-10 text-white uppercase jost-font transition-colors duration-300 group-hover:text-white">
+              Show More Cakes
+              </span>
+              <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+            </button>
             </div>
           </>
         )}

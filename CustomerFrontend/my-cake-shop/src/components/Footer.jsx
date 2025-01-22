@@ -9,10 +9,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* About Section */}
           <div>
-            <h4 className="text-2xl mb-6" style={{ fontFamily: '"Dancing Script", cursive' }}>
+           
               Royal Bakery
-            </h4>
-            <p className="text-gray-400 mb-6 leading-relaxed">
+         
+            <p className="text-gray-400 mb-6 leading-relaxed jost-font ">
               Crafting moments of joy through our delicious artisanal baked goods since 1995. 
               Every creation is made with love and the finest ingredients.
             </p>
@@ -50,7 +50,7 @@ const Footer = () => {
           {/* Opening Hours */}
           <div>
             <h4 className="text-lg font-semibold mb-6">Opening Hours</h4>
-            <ul className="space-y-4 text-gray-400">
+            <ul className="space-y-4 jost-font  text-gray-400">
               <li className="flex justify-between">
                 <span>Monday - Friday:</span>
                 <span>7:00 AM - 7:00 PM</span>
