@@ -39,13 +39,14 @@ const HeroSection = () => {
         </div>
         
         {/* Main Title */}
-        <h1 className="text-6xl md:text-7xl uppercase cormorant-garamond-semibold font-serif tracking-wider mb-8">
+        <h1 className="text-6xl md:text-7xl uppercase cormorant-garamond-medium font-serif tracking-wider mb-8">
         Taste the Magic of <br />  Fresh Bakes
         </h1>
         
         {/* Shop Now Button */}
         <button className="bg-[#8B7355] hover:bg-[#7A6548] transition-colors duration-300 px-12 py-3 uppercase tracking-widest text-sm">
           Shop Now
+          
         </button>
       </div>
     </div>

@@ -10,9 +10,12 @@ const Footer = () => {
           {/* About Section */}
           <div>
            
-              Royal Bakery
+           <p className='text-lg font-semibold mb-6'>
+           Royal Bakery
+           </p>
+              
          
-            <p className="text-gray-400 mb-6 leading-relaxed jost-font ">
+            <p className="text-gray-400 mb-6  mt-7 leading-relaxed jost-font ">
               Crafting moments of joy through our delicious artisanal baked goods since 1995. 
               Every creation is made with love and the finest ingredients.
             </p>
@@ -31,7 +34,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
+            <p className="text-lg font-semibold mb-6">Quick Links</p>
             <ul className="space-y-4">
               {['About Us', 'Our Menu', 'Shop', 'Blog', 'Contact'].map((link) => (
                 <li key={link}>
@@ -49,7 +52,7 @@ const Footer = () => {
 
           {/* Opening Hours */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Opening Hours</h4>
+            <p className="text-lg font-semibold  mb-6">Opening Hours</p>
             <ul className="space-y-4 jost-font  text-gray-400">
               <li className="flex justify-between">
                 <span>Monday - Friday:</span>
@@ -68,7 +71,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-6">Contact Us</h4>
+            <p className="text-lg font-semibold mb-6">Contact Us</p>
             <ul className="space-y-4">
               <li className="flex items-center space-x-3 text-gray-400">
                 <MapPin size={20} />

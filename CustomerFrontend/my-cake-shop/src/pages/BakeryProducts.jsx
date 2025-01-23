@@ -1,60 +1,63 @@
-import React, { useState } from 'react';
-import { Star, ShoppingCart, ArrowRight, MessageCircle } from 'lucide-react';
+import React, { useState } from "react";
+import { Star, ShoppingCart, ArrowRight, MessageCircle } from "lucide-react";
 
 const BakeryProducts = () => {
-  const [activeCategory, setActiveCategory] = useState('All Items');
-  
-  const categories = ['All Items', 'Bread', 'Cake', 'Danish', 'Viennoiserie'];
-  
+  const [activeCategory, setActiveCategory] = useState("All Items");
+
+  const categories = ["All Items", "Bread", "Cake", "Danish", "Viennoiserie"];
+
   const products = [
     {
       id: 1,
-      name: 'Chocolate Cupcake',
-      price: 38.00,
+      name: "Chocolate Cupcake",
+      price: 38.0,
       rating: 5,
-      image: '/api/placeholder/300/300',
-      category: 'Cake'
+      image: "/api/placeholder/300/300",
+      category: "Cake",
     },
     {
       id: 2,
-      name: 'Chocolate Cake',
-      price: 97.00,
+      name: "Chocolate Cake",
+      price: 97.0,
       rating: 4,
-      image: '/api/placeholder/300/300',
-      category: 'Cake'
+      image: "/api/placeholder/300/300",
+      category: "Cake",
     },
     {
       id: 3,
-      name: 'Choco Doughnuts',
-      price: 96.00,
+      name: "Choco Doughnuts",
+      price: 96.0,
       rating: 3,
-      image: '/api/placeholder/300/300',
-      category: 'Danish'
+      image: "/api/placeholder/300/300",
+      category: "Danish",
     },
     {
       id: 4,
-      name: 'Danish Pastry',
-      price: 95.00,
+      name: "Danish Pastry",
+      price: 95.0,
       rating: 4,
-      image: '/api/placeholder/300/300',
-      category: 'Danish'
-    }
+      image: "/api/placeholder/300/300",
+      category: "Danish",
+    },
   ];
 
-  const filteredProducts = activeCategory === 'All Items' 
-    ? products 
-    : products.filter(product => product.category === activeCategory);
+  const filteredProducts =
+    activeCategory === "All Items"
+      ? products
+      : products.filter((product) => product.category === activeCategory);
 
   return (
     <div className="min-h-screen bg-black text-white py-20">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="text-center space-y-4 mb-16">
-          <p className="text-[#D4AF37] uppercase tracking-wider">Our Fresh bakery Product is here</p>
+          <p className="text-[#D4AF37] uppercase tracking-wider">
+            Our Fresh bakery Product is here
+          </p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif">
             Our Special <span className="text-[#D4AF37]">Product</span> For You
           </h2>
-          
+
           {/* Category Navigation */}
           <div className="flex flex-wrap justify-center gap-8 mt-12">
             {categories.map((category) => (
@@ -62,9 +65,9 @@ const BakeryProducts = () => {
                 key={category}
                 onClick={() => setActiveCategory(category)}
                 className={`relative px-6 py-2 transition-all duration-300 ${
-                  activeCategory === category 
-                    ? 'text-[#D4AF37]' 
-                    : 'text-gray-400 hover:text-white'
+                  activeCategory === category
+                    ? "text-[#D4AF37]"
+                    : "text-gray-400 hover:text-white"
                 }`}
               >
                 {category}
@@ -79,19 +82,19 @@ const BakeryProducts = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {filteredProducts.map((product) => (
-            <div 
+            <div
               key={product.id}
               className="group relative bg-black/40 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-300"
             >
               {/* Product Image */}
               <div className="relative mb-4 overflow-hidden rounded-xl">
-                <img 
-                  src={product.image} 
+                <img
+                  src={product.image}
                   alt={product.name}
                   className="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all"></div>
-                
+
                 {/* Quick Actions */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-gradient-to-t from-black/80 to-transparent">
                   <button className="w-full bg-[#D4AF37] text-black py-2 rounded-full flex items-center justify-center gap-2 hover:bg-[#C4A137] transition-colors">
@@ -104,13 +107,17 @@ const BakeryProducts = () => {
               {/* Product Info */}
               <h3 className="text-xl font-medium mb-2">{product.name}</h3>
               <div className="flex items-center justify-between mb-3">
-                <p className="text-[#D4AF37] text-lg font-semibold">${product.price.toFixed(2)}</p>
+                <p className="text-[#D4AF37] text-lg font-semibold">
+                  ${product.price.toFixed(2)}
+                </p>
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
                       className={`w-4 h-4 ${
-                        i < product.rating ? 'text-[#D4AF37] fill-[#D4AF37]' : 'text-gray-400'
+                        i < product.rating
+                          ? "text-[#D4AF37] fill-[#D4AF37]"
+                          : "text-gray-400"
                       }`}
                     />
                   ))}
