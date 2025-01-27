@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Search, Menu, X, ShoppingCart } from 'lucide-react';
-import logo from '../assets/logo.png';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Search, Menu, X, ShoppingCart } from "lucide-react";
+import logo from "../assets/logo.png";
+import { useCart } from "./CartContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activePath, setActivePath] = useState("");
+
+  const { getCartSize } = useCart();
   const [cartCount, setCartCount] = useState(0);
-  const [activePath, setActivePath] = useState('');
+
+  useEffect(() => {
+    setCartCount(getCartSize);
+  }, [getCartSize]);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -17,48 +25,27 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  const location = useLocation();
   useEffect(() => {
-    setActivePath(window.location.pathname);
-  }, []);
-
-  useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCartCount(savedCart.length);
-  }, []);
-
-  const NavLink = ({ href, children }) => {
-    const isActive = activePath === href;
-    return (
-      <a
-        href={href}
-        className={`relative overflow-hidden px-4 py-1 text-[13px] tracking-wider group ${
-          isActive ? 'border border-[#8B7355]' : ''
-        }`}
-      >
-        <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
-          {children}
-        </span>
-        <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-      </a>
-    );
-  };
+    setActivePath(location.pathname);
+  }, [location]);
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 text-white transition-all duration-300 ${
-        isScrolled ? 'bg-[#171718] py-2' : 'bg-[#171718] py-4'
+        isScrolled ? "bg-[#171718] py-2" : "bg-[#171718] py-4"
       }`}
     >
       {/* Contact Info Bar */}
       <div
         className={`border-b border-zinc-800 transition-opacity duration-300 ${
-          isScrolled ? 'opacity-0' : 'opacity-100'
+          isScrolled ? "opacity-0" : "opacity-100"
         }`}
       >
         <div className="container mx-auto px-4 flex justify-between items-center py-2">
@@ -67,10 +54,6 @@ const Navbar = () => {
           </span>
           <div className="flex items-center gap-2">
             <span className="text-sm">Mon-Sun : 7am — 7pm</span>
-            <Search
-              className="cursor-pointer hover:text-gray-300 transition-colors"
-              size={16}
-            />
           </div>
         </div>
       </div>
@@ -88,47 +71,97 @@ const Navbar = () => {
           </button>
 
           {/* Mobile Logo */}
-          <a href="/" className="md:hidden">
+          <Link to="/" className="md:hidden">
             <img
               src={logo}
               alt="Sweet Cream Logo"
               className={`h-8 transition-all duration-300 ${
-                isScrolled ? 'h-6' : 'h-8'
+                isScrolled ? "h-6" : "h-8"
               }`}
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div
             className={` 
             fixed md:relative top-[93px] md:top-0 left-0 w-full md:w-auto
             bg-[#171718] md:bg-transparent
-            ${isMenuOpen ? 'block' : 'hidden'} md:block
+            ${isMenuOpen ? "block" : "hidden"} md:block
             border-t md:border-t-0 border-zinc-800
           `}
           >
             <div className="flex flex-col md:flex-row md:items-center md:space-x-12 p-4 md:p-0">
-              <NavLink href="/">HOME</NavLink>
-              <NavLink href="/aboutus">ABOUT</NavLink>
-              <NavLink href="/shop">SHOP</NavLink>
-              <a href="/" className="hidden md:block px-16">
+              <Link
+                to="/"
+                className={`relative overflow-hidden px-4 py-1 text-[13px] tracking-wider group ${
+                  activePath === "/" ? "border border-[#8B7355]" : ""
+                }`}
+              >
+                <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
+                  HOME
+                </span>
+                <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </Link>
+              <Link
+                to="/aboutus"
+                className={`relative overflow-hidden px-4 py-1 text-[13px] tracking-wider group ${
+                  activePath === "/aboutus" ? "border border-[#8B7355]" : ""
+                }`}
+              >
+                <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
+                  ABOUT
+                </span>
+                <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </Link>
+              <Link
+                to="/shop"
+                className={`relative overflow-hidden px-4 py-1 text-[13px] tracking-wider group ${
+                  activePath === "/shop" ? "border border-[#8B7355]" : ""
+                }`}
+              >
+                <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
+                  SHOP
+                </span>
+                <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </Link>
+              <Link to="/" className="hidden md:block px-16">
                 <img
                   src={logo}
                   alt="Sweet Cream Logo"
                   className={`h-28 transition-all duration-300 ${
-                    isScrolled ? 'h-20' : 'h-28'
+                    isScrolled ? "h-20" : "h-28"
                   }`}
                 />
-              </a>
-              <NavLink href="/blog">BLOG</NavLink>
-              <NavLink href="/contact">CONTACT</NavLink>
+              </Link>
+              <Link
+                to="/blog"
+                className={`relative overflow-hidden px-4 py-1 text-[13px] tracking-wider group ${
+                  activePath === "/blog" ? "border border-[#8B7355]" : ""
+                }`}
+              >
+                <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
+                  BLOG
+                </span>
+                <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </Link>
+              <Link
+                to="/contact"
+                className={`relative overflow-hidden px-4 py-1 text-[13px] tracking-wider group ${
+                  activePath === "/contact" ? "border border-[#8B7355]" : ""
+                }`}
+              >
+                <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
+                  CONTACT
+                </span>
+                <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </Link>
             </div>
           </div>
 
           {/* Cart Button */}
           <div className="relative flex items-center ml-10">
-            <a
-              href="/cart"
+            <Link
+              to="/cart"
               className="relative flex items-center justify-center"
               aria-label="View Cart"
             >
@@ -141,7 +174,7 @@ const Navbar = () => {
                   {cartCount}
                 </span>
               )}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

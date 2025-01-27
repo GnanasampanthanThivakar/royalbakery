@@ -38,6 +38,8 @@ const RestaurantShowcase = () => {
             <img 
               src={coverImage}
               alt="Background with kitchen tools"
+              lazy="true"
+
               className="w-full h-full object-cover opacity-80"
             />
             {/* Dark overlay */}
@@ -78,6 +80,7 @@ const RestaurantShowcase = () => {
                 <div className="aspect-[3/4] mb-6 overflow-hidden ">
                   <img
                     src={member.image}
+                    lazy="true"
                     alt={member.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />

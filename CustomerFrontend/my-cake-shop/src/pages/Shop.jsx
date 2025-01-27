@@ -1,10 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShoppingCart, Loader2, ArrowRight, ShoppingBag, Search, SlidersHorizontal } from "lucide-react";
+import {
+  ShoppingCart,
+  Loader2,
+  ArrowRight,
+  ShoppingBag,
+  Search,
+  SlidersHorizontal,
+} from "lucide-react";
 import axios from "axios";
 import { Input, Select, notification, Drawer, Radio } from "antd";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useCart } from "../components/CartContext";
+import { Helmet } from 'react-helmet-async';
 
 const { Option } = Select;
 
@@ -19,12 +28,15 @@ const Shop = () => {
   const [filterDrawerVisible, setFilterDrawerVisible] = useState(false);
   const itemsPerPage = 8;
   const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchCakes = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:5000/api/customer/cakes");
+        const response = await axios.get(
+          "http://localhost:5000/api/customer/cakes"
+        );
         setCakes(response.data);
         setError(null);
       } catch (error) {
@@ -39,25 +51,29 @@ const Shop = () => {
   }, []);
 
   // Filter and sort cakes
-  const filteredCakes = cakes.filter(cake => {
-    const matchesSearch = cake.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         cake.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesPrice = priceRange === "all" ||
-                        (priceRange === "under25" && cake.price < 25) ||
-                        (priceRange === "25to50" && cake.price >= 25 && cake.price <= 50) ||
-                        (priceRange === "over50" && cake.price > 50);
-    return matchesSearch && matchesPrice;
-  }).sort((a, b) => {
-    switch (sortBy) {
-      case "price-asc":
-        return a.price - b.price;
-      case "price-desc":
-        return b.price - a.price;
-      case "name":
-      default:
-        return a.name.localeCompare(b.name);
-    }
-  });
+  const filteredCakes = cakes
+    .filter((cake) => {
+      const matchesSearch =
+        cake.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        cake.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesPrice =
+        priceRange === "all" ||
+        (priceRange === "under25" && cake.price < 25) ||
+        (priceRange === "25to50" && cake.price >= 25 && cake.price <= 50) ||
+        (priceRange === "over50" && cake.price > 50);
+      return matchesSearch && matchesPrice;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "price-asc":
+          return a.price - b.price;
+        case "price-desc":
+          return b.price - a.price;
+        case "name":
+        default:
+          return a.name.localeCompare(b.name);
+      }
+    });
 
   const paginatedCakes = filteredCakes.slice(
     (currentPage - 1) * itemsPerPage,
@@ -67,15 +83,21 @@ const Shop = () => {
   const totalPages = Math.ceil(filteredCakes.length / itemsPerPage);
 
   const handleAddToCart = (cake) => {
-    const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const updatedCart = [...currentCart, cake];
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    
+    console.log("Adding to cart:", cake);
+
+    addToCart({
+      _id: cake._id,
+      name: cake.name,
+      price: cake.price,
+      photo: cake.photo,
+      quantity: 1,
+    });
+
     notification.success({
-      message: 'Added to Cart',
+      message: "Added to Cart",
       description: `${cake.name} added to cart!`,
-      placement: 'topRight',
-      className: 'bg-[#8B7355] text-white',
+      placement: "topRight",
+      className: "bg-[#8B7355] text-white",
       duration: 2,
     });
   };
@@ -86,7 +108,15 @@ const Shop = () => {
 
   return (
     <section className="bg-[#171718] py-24 min-h-screen mt-40">
-      <Navbar/>
+       <Helmet>
+        <title>Shop - Exquisite Cakes</title>
+        <meta name="description" content="Explore a variety of exquisite cakes at our shop." />
+        <meta name="keywords" content="cakes, shop, sweet treats, bakery" />
+        <meta property="og:title" content="Shop - Exquisite Cakes" />
+        <meta property="og:description" content="Explore a variety of exquisite cakes at our shop." />
+        <meta property="og:image" content="URL-to-your-image" />
+      </Helmet>
+      <Navbar />
       <div className="container mx-auto px-4 sm:px-6">
         {/* Elegant Header */}
         <div className="text-center mb-20">
@@ -108,10 +138,10 @@ const Shop = () => {
               onChange={(e) => setSearchTerm(e.target.value)}
               prefix={<Search className="text-gray-400 w-4 h-4" />}
               className="bg-[#1C1C1D] border-[#8B7355]/20 text-white rounded-md py-2 px-4"
-              style={{ 
-                backgroundColor: '#1C1C1D', 
-                borderColor: 'rgba(139, 115, 85, 0.2)',
-                color: 'white'
+              style={{
+                backgroundColor: "#1C1C1D",
+                borderColor: "rgba(139, 115, 85, 0.2)",
+                color: "white",
               }}
             />
           </div>
@@ -122,13 +152,12 @@ const Shop = () => {
               onChange={setSortBy}
               className="w-40 "
               style={{
-             
-                backgroundColor: '#1C1C1D',
-                color: 'white'
+                backgroundColor: "#1C1C1D",
+                color: "white",
               }}
               dropdownStyle={{
-                backgroundColor: '#1C1C1D',
-                borderColor: 'rgba(139, 115, 85, 0.2)'
+                backgroundColor: "#1C1C1D",
+                borderColor: "rgba(139, 115, 85, 0.2)",
               }}
             >
               <Option value="name">Sort by Name</Option>
@@ -163,28 +192,36 @@ const Shop = () => {
           className="bg-[#1C1C1D]"
           styles={{
             header: {
-              background: '#1C1C1D',
-              color: 'white',
-              borderBottom: '1px solid rgba(139, 115, 85, 0.2)'
+              background: "#1C1C1D",
+              color: "white",
+              borderBottom: "1px solid rgba(139, 115, 85, 0.2)",
             },
             body: {
-              background: '#1C1C1D',
-              color: 'white'
-            }
+              background: "#1C1C1D",
+              color: "white",
+            },
           }}
         >
           <div className="space-y-6">
             <div>
               <h4 className="text-white mb-4">Price Range</h4>
-              <Radio.Group 
-                value={priceRange} 
+              <Radio.Group
+                value={priceRange}
                 onChange={(e) => setPriceRange(e.target.value)}
                 className="space-y-2 text-white"
               >
-                <Radio value="all" className="text-white block">All Prices</Radio>
-                <Radio value="under25" className="text-white block">Under 25</Radio>
-                <Radio value="25to50" className="text-white block">25 - 50</Radio>
-                <Radio value="over50" className="text-white block">Over 50</Radio>
+                <Radio value="all" className="text-white block">
+                  All Prices
+                </Radio>
+                <Radio value="under25" className="text-white block">
+                  Under 25
+                </Radio>
+                <Radio value="25to50" className="text-white block">
+                  25 - 50
+                </Radio>
+                <Radio value="over50" className="text-white block">
+                  Over 50
+                </Radio>
               </Radio.Group>
             </div>
           </div>
@@ -210,13 +247,16 @@ const Shop = () => {
                     <img
                       src={cake.photo}
                       alt={cake.name}
+                      lazy="true"
                       className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
-                    
+
                     {/* Price Tag */}
                     <div className="absolute top-4 right-4 bg-[#171718]/80 backdrop-blur-sm px-4 py-2 rounded-md">
-                      <span className="text-[#8B7355] font-serif">{cake.price} LKR</span>
+                      <span className="text-[#8B7355] font-serif">
+                        {cake.price} LKR
+                      </span>
                     </div>
 
                     {/* Add to Cart Button */}
@@ -226,7 +266,9 @@ const Shop = () => {
                     >
                       <span className="bg-[#8B7355] text-white px-6 py-3 rounded-md flex items-center space-x-3 transform -translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#9B8365]">
                         <ShoppingCart className="w-4 h-4" />
-                        <span className="text-sm uppercase tracking-wider">Add to Cart</span>
+                        <span className="text-sm uppercase tracking-wider">
+                          Add to Cart
+                        </span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                       </span>
                     </button>
@@ -250,27 +292,31 @@ const Shop = () => {
             {totalPages > 1 && (
               <div className="flex justify-center items-center space-x-2 mt-12">
                 <button
-                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
                   className="bg-[#1C1C1D] border border-[#8B7355]/20 text-white px-4 py-2 rounded-md disabled:opacity-50"
                 >
                   Previous
                 </button>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                  <button
-                    key={page}
-                    onClick={() => setCurrentPage(page)}
-                    className={`px-4 py-2 rounded-md ${
-                      currentPage === page 
-                        ? 'bg-[#8B7355] text-white' 
-                        : 'bg-[#1C1C1D] border border-[#8B7355]/20 text-white'
-                    }`}
-                  >
-                    {page}
-                  </button>
-                ))}
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (page) => (
+                    <button
+                      key={page}
+                      onClick={() => setCurrentPage(page)}
+                      className={`px-4 py-2 rounded-md ${
+                        currentPage === page
+                          ? "bg-[#8B7355] text-white"
+                          : "bg-[#1C1C1D] border border-[#8B7355]/20 text-white"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  )
+                )}
                 <button
-                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  onClick={() =>
+                    setCurrentPage((p) => Math.min(totalPages, p + 1))
+                  }
                   disabled={currentPage === totalPages}
                   className="bg-[#1C1C1D] border border-[#8B7355]/20 text-white px-4 py-2 rounded-md disabled:opacity-50"
                 >
@@ -281,7 +327,7 @@ const Shop = () => {
           </>
         )}
       </div>
-      <Footer/>
+      <Footer />
     </section>
   );
 };

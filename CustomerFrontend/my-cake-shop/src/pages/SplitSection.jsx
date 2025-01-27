@@ -1,8 +1,13 @@
-import React from 'react';
-import coverImage from '../assets/bake2.jpg';
-import { motion } from 'framer-motion';
-
+import React from "react";
+import coverImage from "../assets/bake2.jpg";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // Add the useNavigate import
 const SplitSection = () => {
+  const navigate = useNavigate();
+
+  const handleReadmore = () => {
+    navigate("/aboutus"); // Redirect to the cake page
+  };
   return (
     <div className="bg-[#171718] text-white py-12 md:py-24 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,13 +23,15 @@ const SplitSection = () => {
               FLAVOUR
             </h2>
             <p className="text-white text-sm jost-font leading-8 mb-8 max-w-sm mx-auto opacity-90 hover:opacity-100 transition-opacity duration-300">
-              It Is A Long Established Fact That A Reader Will 
-              Be Distracted By The Readable Content Of A 
-              Page When Looking At You. The Point Of Using 
-              Lorem Ipsum Is That It Has Making It Look Like 
-              Readable English Dummy.
+              It Is A Long Established Fact That A Reader Will Be Distracted By
+              The Readable Content Of A Page When Looking At You. The Point Of
+              Using Lorem Ipsum Is That It Has Making It Look Like Readable
+              English Dummy.
             </p>
-            <button className="relative overflow-hidden border border-[#8B7355] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest group">
+            <button
+              onClick={handleReadmore}
+              className="relative overflow-hidden border border-[#8B7355] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest group"
+            >
               <span className="relative z-10 transition-colors jost-font  duration-300 group-hover:text-white">
                 READ MORE
               </span>
@@ -38,6 +45,7 @@ const SplitSection = () => {
               <img
                 src={coverImage}
                 alt="Chocolate dripping on cookies"
+                lazy="true"
                 className="w-full max-w-full object-cover shadow-md transform transition-all duration-700 hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#171718] via-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
@@ -55,13 +63,15 @@ const SplitSection = () => {
               PROCESS
             </h2>
             <p className="text-white text-sm jost-font leading-8 mb-8 max-w-sm mx-auto opacity-90 hover:opacity-100 transition-opacity duration-300">
-              It Is A Long Established Fact That A Reader Will 
-              Be Distracted By The Readable Content Of A 
-              Page When Looking At You. The Point Of Using 
-              Lorem Ipsum Is That It Has Making It Look Like 
-              Readable English Dummy.
+              It Is A Long Established Fact That A Reader Will Be Distracted By
+              The Readable Content Of A Page When Looking At You. The Point Of
+              Using Lorem Ipsum Is That It Has Making It Look Like Readable
+              English Dummy.
             </p>
-            <button className="relative overflow-hidden border border-[#8B7355] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest group">
+            <button
+              onClick={handleReadmore}
+              className="relative overflow-hidden border border-[#8B7355] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest group"
+            >
               <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
                 READ MORE
               </span>
@@ -70,20 +80,6 @@ const SplitSection = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            background-position: 200% 0;
-          }
-          100% {
-            background-position: -200% 0;
-          }
-        }
-        .animate-shimmer {
-          animation: shimmer 6s infinite linear;
-        }
-      `}</style>
     </div>
   );
 };

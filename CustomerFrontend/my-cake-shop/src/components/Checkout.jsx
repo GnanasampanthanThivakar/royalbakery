@@ -1,62 +1,47 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Loader2, ShoppingCart } from "lucide-react";
+import { Loader2, ShoppingCart, CheckCircle } from "lucide-react";
+import { Form, Input, Select } from "antd";
+
+const { TextArea } = Input;
 
 const Checkout = () => {
+  const [form] = Form.useForm();
   const [cart, setCart] = useState([]);
-  const [customerName, setCustomerName] = useState("");
-  const [customerPhone, setCustomerPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [orderDetails, setOrderDetails] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(cartData);
-
-    const initialDetails = cartData.map((cake) => ({
-      cakeId: cake._id,
-      toppings: "",
-      message: "",
-      occasion: "",
-      type: "",
-    }));
-    setOrderDetails(initialDetails);
+    const cartData = JSON.parse(localStorage.getItem("cart")) || {};
+    const products = cartData.products || [];
+    setCart(products);
   }, []);
 
-  const handleDetailChange = (index, field, value) => {
-    const updatedDetails = [...orderDetails];
-    updatedDetails[index][field] = value;
-    setOrderDetails(updatedDetails);
-  };
-
-  const handleSubmitOrder = async (e) => {
-    e.preventDefault();
+  const handleSubmitOrder = async (values) => {
     setLoading(true);
 
     try {
-      for (let i = 0; i < cart.length; i++) {
-        const cakeData = {
-          cakeId: orderDetails[i].cakeId,
-          name: cart[i].name,
-          price: cart[i].price,
-          toppings: orderDetails[i].toppings,
-          message: orderDetails[i].message,
-          occasion: orderDetails[i].occasion,
-          type: orderDetails[i].type,
-          customerName,
-          customerPhone,
-          address,
-        };
+      const orders = cart.map((item, index) => ({
+        cakeId: item._id,
+        name: item.name,
+        price: item.price,
+        toppings: values[`toppings_${index}`],
+        message: values[`message_${index}`],
+        occasion: values[`occasion_${index}`],
+        type: values[`type_${index}`],
+        customerName: values.customerName,
+        customerPhone: values.customerPhone,
+        address: values.address,
+      }));
 
-        await axios.post("http://localhost:5000/api/customer/order", cakeData);
+      for (const order of orders) {
+        await axios.post("http://localhost:5000/api/customer/order", order);
       }
 
-      alert("All orders placed successfully!");
       localStorage.removeItem("cart");
-      navigate("/");
+      setShowOrderConfirmation(true);
     } catch (error) {
       console.error("Error placing orders:", error);
       alert("Failed to place the orders. Please try again.");
@@ -65,13 +50,43 @@ const Checkout = () => {
     }
   };
 
-  if (cart.length === 0)
+  const handleCloseConfirmation = () => {
+    setShowOrderConfirmation(false);
+    navigate("/");
+  };
+
+  const inputStyle = {
+    backgroundColor: "#2C2C2D",
+    color: "white",
+    border: "none",
+  };
+
+  const selectStyle = {
+    ...inputStyle,
+    "& .ant-select-selector": {
+      backgroundColor: "#2C2C2D !important",
+      color: "white !important",
+      border: "none !important",
+    },
+  };
+
+  // Custom style to hide antd form label
+  const formItemStyle = {
+    marginBottom: "0",
+    "& .ant-form-item-label": {
+      display: "none",
+    },
+  };
+
+  if (cart.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#171718]">
         <div className="text-center text-white">
           <ShoppingCart className="w-16 h-16 mx-auto mb-4 text-[#8B7355]" />
           <h2 className="text-2xl font-serif mb-2">Your cart is empty</h2>
-          <p className="text-gray-400 mb-4">Add some delicious cakes to your cart!</p>
+          <p className="text-gray-400 mb-4">
+            Add some delicious cakes to your cart!
+          </p>
           <button
             onClick={() => navigate("/cakes")}
             className="bg-[#8B7355] text-white px-6 py-2 rounded hover:bg-[#7A6548] transition-colors duration-300"
@@ -81,119 +96,207 @@ const Checkout = () => {
         </div>
       </div>
     );
+  }
 
   return (
     <div className="min-h-screen bg-[#171718] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-4xl font-serif text-white mb-8 text-center">Checkout</h2>
+        <h2 className="text-4xl font-serif text-white mb-8 text-center">
+          Checkout
+        </h2>
 
-        <div className="bg-[#1C1C1D] p-6 rounded-lg shadow-lg mb-8">
-          <h3 className="text-2xl font-serif text-white mb-4">Your Order</h3>
-          {cart.map((cake, index) => (
-            <div key={index} className="mb-6 pb-6 border-b border-[#8B7355]/20 last:border-b-0">
-              <div className="flex items-start space-x-4">
-                <img
-                  src={cake.photo || "/placeholder.svg?height=100&width=100"}
-                  alt={cake.name}
-                  className="w-24 h-24 object-cover rounded"
-                />
-                <div className="flex-grow">
-                  <h4 className="text-xl font-serif text-white mb-2">{cake.name}</h4>
-                  <p className="text-[#8B7355] mb-2">{cake.price.toFixed(2)} LKR</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input
-                      type="text"
-                      placeholder="Toppings"
-                      value={orderDetails[index]?.toppings || ""}
-                      onChange={(e) => handleDetailChange(index, "toppings", e.target.value)}
-                      className="bg-[#2C2C2D] text-white placeholder-gray-500 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Message on Cake"
-                      value={orderDetails[index]?.message || ""}
-                      onChange={(e) => handleDetailChange(index, "message", e.target.value)}
-                      className="bg-[#2C2C2D] text-white placeholder-gray-500 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                    />
-                    <select
-                      value={orderDetails[index]?.occasion || ""}
-                      onChange={(e) => handleDetailChange(index, "occasion", e.target.value)}
-                      className="bg-[#2C2C2D] text-white px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                    >
-                      <option value="" disabled>
-                        Select Occasion
-                      </option>
-                      <option value="Birthday">Birthday</option>
-                      <option value="Wedding">Wedding</option>
-                      <option value="Anniversary">Anniversary</option>
-                      <option value="Festival">Festival</option>
-                    </select>
-                    <select
-                      value={orderDetails[index]?.type || ""}
-                      onChange={(e) => handleDetailChange(index, "type", e.target.value)}
-                      className="bg-[#2C2C2D] text-white px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-                    >
-                      <option value="" disabled>
-                        Select Type
-                      </option>
-                      <option value="Veg">Veg</option>
-                      <option value="Non-Veg">Non-Veg</option>
-                      
-                    </select>
+        <Form form={form} onFinish={handleSubmitOrder}>
+          <div className="bg-[#1C1C1D] p-6 rounded-lg shadow-lg mb-8">
+            <h3 className="text-2xl font-serif text-white mb-4">Your Order</h3>
+            {cart.map((cake, index) => (
+              <div
+                key={index}
+                className="mb-6 pb-6 border-b border-[#8B7355]/20 last:border-b-0"
+              >
+                <div className="flex items-start space-x-4">
+                  <img
+                    src={cake.photo || "/placeholder.svg?height=100&width=100"}
+                    alt={cake.name}
+                    className="w-24 h-24 object-cover rounded"
+                  />
+                  <div className="flex-grow">
+                    <h4 className="text-xl font-serif text-white mb-2">
+                      {cake.name}
+                    </h4>
+                    <p className="text-[#8B7355] mb-2">
+                      {cake.price.toFixed(2)} LKR
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <Form.Item
+                        name={`toppings_${index}`}
+                        rules={[
+                          { required: true, message: "Please enter toppings" },
+                        ]}
+                        style={formItemStyle}
+                      >
+                        <Input
+                          placeholder="Toppings"
+                          style={inputStyle}
+                          className="placeholder-gray-500"
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        name={`message_${index}`}
+                        rules={[
+                          { required: true, message: "Please enter message" },
+                        ]}
+                        style={formItemStyle}
+                      >
+                        <Input
+                          placeholder="Message on Cake"
+                          style={inputStyle}
+                          className="placeholder-gray-500"
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        name={`occasion_${index}`}
+                        rules={[
+                          { required: true, message: "Please select occasion" },
+                        ]}
+                        style={formItemStyle}
+                      >
+                        <Select
+                          placeholder="Select Occasion"
+                          style={selectStyle}
+                          className="bg-[#2C2C2D] placeholder-slate-500 text-white"
+                          dropdownStyle={{
+                            backgroundColor: "#2C2C2D",
+                            color: "white",
+                          }}
+                        >
+                          <Select.Option value="Birthday">
+                            Birthday
+                          </Select.Option>
+                          <Select.Option value="Wedding">Wedding</Select.Option>
+                          <Select.Option value="Anniversary">
+                            Anniversary
+                          </Select.Option>
+                          <Select.Option value="Festival">
+                            Festival
+                          </Select.Option>
+                        </Select>
+                      </Form.Item>
+                      <Form.Item
+                        name={`type_${index}`}
+                        rules={[
+                          { required: true, message: "Please select type" },
+                        ]}
+                        style={formItemStyle}
+                      >
+                        <Select
+                          placeholder="Select Type"
+                          style={selectStyle}
+                          className="bg-[#2C2C2D]  text-white"
+                          dropdownStyle={{
+                            backgroundColor: "#2C2C2D",
+                            color: "white",
+                          }}
+                        >
+                          <Select.Option value="Veg">Veg</Select.Option>
+                          <Select.Option value="Non-Veg">Non-Veg</Select.Option>
+                        </Select>
+                      </Form.Item>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-
-        <form onSubmit={handleSubmitOrder} className="bg-[#1C1C1D] p-6 rounded-lg shadow-lg">
-          <h3 className="text-2xl font-serif text-white mb-4">Customer Details</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-            <input
-              type="text"
-              placeholder="Your Name"
-              value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
-              required
-              className="bg-[#2C2C2D] text-white placeholder-gray-500 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-            />
-            <input
-              type="text"
-              placeholder="Your Phone"
-              value={customerPhone}
-              onChange={(e) => setCustomerPhone(e.target.value)}
-              required
-              className="bg-[#2C2C2D] text-white placeholder-gray-500 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355]"
-            />
+            ))}
           </div>
-          <textarea
-            placeholder="Your Address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            required
-            className="w-full bg-[#2C2C2D] text-white placeholder-gray-500 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-[#8B7355] mb-6"
-            rows={4}
-          ></textarea>
-          <button
-            type="submit"
-            className="w-full bg-[#8B7355] text-white py-3 rounded flex items-center justify-center space-x-2 hover:bg-[#7A6548] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={loading}
-          >
-            {loading ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin" />
-                <span>Processing...</span>
-              </>
-            ) : (
-              <>
-                <ShoppingCart className="w-5 h-5" />
-                <span>Place Order</span>
-              </>
-            )}
-          </button>
-        </form>
+
+          <div className="bg-[#1C1C1D] p-6 rounded-lg shadow-lg">
+            <h3 className="text-2xl font-serif text-white mb-4">
+              Customer Details
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <Form.Item
+                name="customerName"
+                rules={[{ required: true, message: "Please enter your name" }]}
+                style={formItemStyle}
+              >
+                <Input
+                  placeholder="Your Name"
+                  style={inputStyle}
+                  className="placeholder-gray-500"
+                />
+              </Form.Item>
+              <Form.Item
+                name="customerPhone"
+                rules={[
+                  { required: true, message: "Please enter your phone number" },
+                  {
+                    pattern: /^[0-9]{10}$/,
+                    message: "Please enter a valid 10-digit phone number",
+                  },
+                ]}
+                style={formItemStyle}
+              >
+                <Input
+                  placeholder="Your Phone"
+                  style={inputStyle}
+                  className="placeholder-gray-500"
+                />
+              </Form.Item>
+            </div>
+            <Form.Item
+              name="address"
+              rules={[{ required: true, message: "Please enter your address" }]}
+              style={formItemStyle}
+            >
+              <TextArea
+                placeholder="Your Address"
+                rows={4}
+                style={inputStyle}
+                className="placeholder-gray-500 mb-6"
+              />
+            </Form.Item>
+            <button
+              type="submit"
+              className="w-full bg-[#8B7355] text-white py-3 rounded flex items-center justify-center space-x-2 hover:bg-[#7A6548] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <span>Processing...</span>
+                </>
+              ) : (
+                <>
+                  <ShoppingCart className="w-5 h-5" />
+                  <span>Place Order</span>
+                </>
+              )}
+            </button>
+          </div>
+        </Form>
       </div>
+
+      {showOrderConfirmation && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-[#1C1C1D] p-8 rounded-lg text-center max-w-md w-full">
+            <CheckCircle className="w-16 h-16 mx-auto mb-4 text-[#8B7355]" />
+            <h2 className="text-2xl font-serif text-white mb-4">
+              Order Confirmed!
+            </h2>
+            <p className="text-gray-400 mb-6">
+              Your delicious cakes are being prepared with love and care. Thank
+              you for your order! <br />
+              Note: Once your order is placed, we will call you to confirm the
+              details. 😊
+            </p>
+            <button
+              onClick={handleCloseConfirmation}
+              className="bg-[#8B7355] text-white px-6 py-2 rounded hover:bg-[#7A6548] transition-colors duration-300"
+            >
+              Continue Shopping
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

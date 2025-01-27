@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Loader2, ArrowRight, ShoppingBag } from "lucide-react";
+import { useCart } from "./CartContext";
 
 const CakeList = () => {
   const [cakes, setCakes] = useState([]);
@@ -9,12 +10,15 @@ const CakeList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   useEffect(() => {
     const fetchCakes = async () => {
       try {
         setLoading(true);
-        const response = await axios.get("http://localhost:5000/api/customer/cakes");
+        const response = await axios.get(
+          "http://localhost:5000/api/customer/cakes"
+        );
         setCakes(response.data);
         setVisibleCakes(response.data.slice(0, 4)); // Display only the first 4 cakes initially
         setError(null);
@@ -30,9 +34,15 @@ const CakeList = () => {
   }, []);
 
   const handleAddToCart = (cake) => {
-    const currentCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const updatedCart = [...currentCart, cake];
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    console.log("Adding to cart:", cake);
+
+    addToCart({
+      _id: cake._id,
+      name: cake.name,
+      price: cake.price,
+      photo: cake.photo,
+      quantity: 1,
+    });
 
     const notification = document.createElement("div");
     notification.className =
@@ -102,7 +112,9 @@ const CakeList = () => {
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
                     <div className="absolute top-4 right-4 bg-[#171718]/80 backdrop-blur-sm px-4 py-2 rounded-md">
-                      <span className="text-[#8B7355] font-serif">{cake.price} LKR </span>
+                      <span className="text-[#8B7355] font-serif">
+                        {cake.price} LKR{" "}
+                      </span>
                     </div>
                     <button
                       onClick={() => handleAddToCart(cake)}
@@ -110,7 +122,9 @@ const CakeList = () => {
                     >
                       <span className="bg-[#8B7355] text-white px-6 py-3 rounded-md flex items-center space-x-3 transform -translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-[#9B8365]">
                         <ShoppingCart className="w-4 h-4" />
-                        <span className="text-sm uppercase tracking-wider">Add to Cart</span>
+                        <span className="text-sm uppercase tracking-wider">
+                          Add to Cart
+                        </span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                       </span>
                     </button>
@@ -131,12 +145,15 @@ const CakeList = () => {
             </div>
 
             <div className="text-center mt-10">
-              <button  onClick={handleShowMore} className="relative overflow-hidden border border-[#8B7355] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest group">
-              <span className="relative z-10 text-white uppercase jost-font transition-colors duration-300 group-hover:text-white">
-              Show More Cakes
-              </span>
-              <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            </button>
+              <button
+                onClick={handleShowMore}
+                className="relative overflow-hidden border border-[#8B7355] px-6 py-2 sm:px-8 sm:py-3 text-xs sm:text-sm tracking-widest group"
+              >
+                <span className="relative z-10 text-white uppercase jost-font transition-colors duration-300 group-hover:text-white">
+                  Show More Cakes
+                </span>
+                <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              </button>
             </div>
           </>
         )}

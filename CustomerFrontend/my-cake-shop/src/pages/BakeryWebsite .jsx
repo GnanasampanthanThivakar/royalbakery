@@ -17,6 +17,7 @@ const BakeryWebsite = () => {
           <img
             src={coverImage}
             alt="Bakery"
+            lazy="true"
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
@@ -47,6 +48,7 @@ const BakeryWebsite = () => {
               <img
                 src={left}
                 alt="Macarons"
+                lazy="true"
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
@@ -58,6 +60,7 @@ const BakeryWebsite = () => {
               <img
                 src={right}
                 alt="Cupcakes"
+                lazy="true"
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </div>

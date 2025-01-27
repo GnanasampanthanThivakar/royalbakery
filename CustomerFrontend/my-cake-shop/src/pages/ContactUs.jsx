@@ -3,10 +3,22 @@ import coverImage from '../assets/about.jpg';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
-
+import { Helmet } from 'react-helmet-async';
 const ContactUs = () => {
   return (
     <div>
+       <Helmet>
+        <title>Contact Us | Royal Bakery</title>
+        <meta name="description" content="Get in touch with Royal Bakery for inquiries, orders, and customer support. We're here to help with all your bakery needs!" />
+        <meta name="keywords" content="contact us, customer support, bakery orders, Royal Bakery, get in touch, order inquiry, cake orders, pastries, fresh bakery" />
+        <meta property="og:title" content="Contact Us | Royal Bakery" />
+        <meta property="og:description" content="Have questions or need assistance? Contact Royal Bakery for orders and support." />
+        <meta property="og:url" content="https://www.royalbakery.com/contact" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Contact Us | Royal Bakery" />
+        <meta name="twitter:description" content="Reach out to Royal Bakery for support, orders, and inquiries." />
+      </Helmet>
+
       <Navbar />
       <div className="w-full  h-full bg-[#171718] ">
         {/* Hero Section */}
@@ -15,6 +27,7 @@ const ContactUs = () => {
             <img
               src={coverImage}
               alt="Contact us cover"
+              lazy="true"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/20"></div>

@@ -5,7 +5,7 @@ import { Loader2, ArrowRight, CalendarDays } from "lucide-react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import heroImage from '../assets/dish.jpg';  // Adjust the path accordingly
-
+import { Helmet } from 'react-helmet-async';
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,6 +41,18 @@ const BlogList = () => {
 
   return (
     <div className="min-h-screen mt-40 bg-[#171718]">
+       <Helmet>
+        <title>Royal Bakery Blog | Fresh Updates, Recipes, and More</title>
+        <meta name="description" content="Explore the Royal Bakery blog for delicious recipes, baking tips, the latest news, and updates from our bakery." />
+        <meta name="keywords" content="Royal Bakery blog, bakery recipes, baking tips, fresh bread, cake recipes, Royal Bakery updates, pastries, food blog" />
+        <meta property="og:title" content="Royal Bakery Blog | Fresh Updates, Recipes, and More" />
+        <meta property="og:description" content="Discover the latest recipes, tips, and updates from Royal Bakery on our blog." />
+        <meta property="og:url" content="https://www.royalbakery.com/blog" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:title" content="Royal Bakery Blog | Fresh Updates, Recipes, and More" />
+        <meta name="twitter:description" content="Stay updated with delicious recipes, baking tips, and bakery news at Royal Bakery." />
+      </Helmet>
+
       <Navbar/>
       
       {/* Hero Section */}

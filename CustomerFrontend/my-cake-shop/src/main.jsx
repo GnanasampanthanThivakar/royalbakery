@@ -1,10 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-
-createRoot(document.getElementById('root')).render(
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { CartProvider } from "./components/CartContext";
+import { HelmetProvider } from "react-helmet-async";
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <HelmetProvider>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </HelmetProvider>
+  </StrictMode>
+);
