@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Loader2, ShoppingCart, CheckCircle } from "lucide-react";
 import { Form, Input, Select } from "antd";
+import "./Checkout.css";
 
 const { TextArea } = Input;
 
