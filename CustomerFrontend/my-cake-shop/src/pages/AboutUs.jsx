@@ -74,16 +74,16 @@ const AboutUs = () => {
               />
             </div>
             <div className="w-full md:w-1/2">
-              <h3 className="text-5xl font-serif mb-4 text-white cormorant-garamond-light uppercase">
+              <h3 className="text-5xl  mb-4 text-white cormorant-garamond-light uppercase">
                 Our Craft
               </h3>
-              <p className="text-white leading-relaxed text-justify md:pr-20">
+              <p className="text-white  text-justify md:pr-20">
                 We specialize in creating beautiful, custom-designed cakes that
                 are as delicious as they are stunning. Each cake is handcrafted
                 with attention to detail and made with the finest ingredients to
                 ensure both visual appeal and exceptional taste.
               </p>
-              <p className="text-white leading-relaxed text-justify md:pr-20">
+              <p className="text-white  text-justify md:pr-20">
                 We specialize in creating beautiful, custom-designed cakes that
                 are as delicious as they are stunning. Each cake is handcrafted
                 with attention to detail and made with the finest ingredients to
@@ -104,17 +104,17 @@ const AboutUs = () => {
               />
             </div>
             <div className="w-full md:w-1/2">
-              <h3 className="text-5xl font-serif mb-4 md:pl-20 text-white cormorant-garamond-light uppercase">
+              <h3 className="text-5xl  mb-4 md:pl-20 text-white cormorant-garamond-light uppercase">
                 Custom Designs
               </h3>
-              <p className="text-white leading-relaxed md:pl-20 text-justify">
+              <p className="text-white  md:pl-20 text-justify">
                 Whether you're celebrating a wedding, birthday, or special
                 occasion, our team works closely with you to bring your vision
                 to life. We combine traditional techniques with modern design
                 elements to create unique cakes that reflect your personal
                 style.
               </p>
-              <p className="text-white leading-relaxed text-justify md:pl-20">
+              <p className="text-white text-justify md:pl-20">
                 We specialize in creating beautiful, custom-designed cakes that
                 are as delicious as they are stunning. Each cake is handcrafted
                 with attention to detail and made with the finest ingredients to

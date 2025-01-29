@@ -88,13 +88,26 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // Clear the entire cart
+  
   const clearCart = () => {
-    setCart(initialCartState);
-    if (typeof localStorage !== "undefined") {
-      localStorage.removeItem("cart");
-    }
+    setCart([]); // Clear state
+    localStorage.removeItem("cart"); // Clear local storage
   };
+
+
+  // const clearCart = () => {
+  //   // Reset the cart state to its initial state
+  //   setCart(initialCartState);
+
+  //   // Check if localStorage is available in the environment
+  //   if (typeof window !== "undefined" && window.localStorage) {
+  //     try {
+  //       localStorage.removeItem("cart"); // Clear cart data from localStorage
+  //     } catch (error) {
+  //       console.error("Error removing cart from localStorage:", error);
+  //     }
+  //   }
+  // };
 
   // Calculate the total price of items in the cart
   const calculateTotal = () => {
@@ -118,7 +131,8 @@ export const CartProvider = ({ children }) => {
   const getCartItems = () => cart.products;
 
   // Get the size of the cart (number of items)
-  const getCartSize = () => (Array.isArray(cart.products) ? cart.products.length : 0);
+  const getCartSize = () =>
+    Array.isArray(cart.products) ? cart.products.length : 0;
 
   // Get the total value of the cart
   const getCartValue = () => cart.totalPrice;

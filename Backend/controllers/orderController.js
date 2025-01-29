@@ -2,26 +2,41 @@ const Order = require("../models/Order");
 
 exports.createOrder = async (req, res) => {
   try {
-    const {
-      cakeId,
-      toppings,
-      message,
-      occasion,
-      customerName,
-      customerPhone,
-      address,
-    } = req.body;
-    const order = new Order({
-      cakeId,
-      toppings,
-      message,
-      occasion,
-      customerName,
-      customerPhone,
-      address,
+    const { orders } = req.body;
+
+    // const {
+    //   cakeId,
+    //   toppings,
+    //   message,
+    //   occasion,
+    //   customerName,
+    //   customerPhone,
+    //   address,
+    // } = req.body;
+
+    if (!orders || orders.length === 0) {
+      return res.status(400).json({ message: "No orders found" });
+    }
+
+    orders.forEach(async (order) => {
+      const orderItem = new Order({
+        cakeId: order.cakeId,
+        toppings: order.toppings,
+        message: order.message,
+        occasion: order.occasion,
+        customerName: order.customerName,
+        customerPhone: order.customerPhone,
+        address: order.address,
+      });
+
+      const response = await orderItem.save();
+
+      if (!response) {
+        throw new Error("Failed to create order");
+      }
     });
-    await order.save();
-    res.status(201).json(order);
+
+    return res.status(200).json({ message: "Order created successfully!" });
   } catch (err) {
     res.status(500).json({ message: "Server error" });
   }

@@ -43,7 +43,7 @@ const HeroSection = () => {
           </div>
 
           {/* Main Title */}
-          <h1 className="text-6xl md:text-7xl uppercase cormorant-garamond-medium font-serif tracking-wider mb-8">
+          <h1 className="text-6xl md:text-7xl uppercase cormorant-garamond-medium  tracking-wider mb-8">
             Taste the Magic of <br /> Fresh Bakes
           </h1>
 

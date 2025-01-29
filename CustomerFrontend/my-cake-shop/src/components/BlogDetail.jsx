@@ -132,7 +132,7 @@ const BlogDetail = () => {
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-serif text-white mb-6">
+            <h1 className="text-3xl md:text-4xl  text-white mb-6">
               {blog.title}
             </h1>
 

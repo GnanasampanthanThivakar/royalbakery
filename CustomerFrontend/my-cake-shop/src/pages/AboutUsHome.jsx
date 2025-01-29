@@ -48,8 +48,8 @@ const RestaurantShowcase = () => {
           
           {/* Quote content */}
           <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
-            <span className="block text-white text-6xl font-serif mb-4">"</span>
-            <p className="text-white text-2xl md:text-3xl font-serif italic mb-6  cormorant-garamond-medium">
+            <span className="block text-white text-6xl  mb-4">"</span>
+            <p className="text-white text-2xl md:text-3xl  italic mb-6  cormorant-garamond-medium">
             Our cakes are freshly made with the finest ingredients, perfect for any event. Whether it's a birthday or a simple treat, indulge in our mouthwatering cakes!
             </p>
             {/* <p className="text-white text-lg uppercase tracking-wider">
@@ -66,7 +66,7 @@ const RestaurantShowcase = () => {
           <h2 className=" tracking-widest uppercase text-sm mb-4 text-[#8B7355] ">
             OUR TEAM
           </h2>
-          <h1 className="text-white text-5xl font-serif  cormorant-garamond-medium">
+          <h1 className="text-white text-5xl   cormorant-garamond-medium">
             MASTER COOK
           </h1>
         </div>

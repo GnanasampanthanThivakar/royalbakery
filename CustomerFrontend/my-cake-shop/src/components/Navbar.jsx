@@ -10,6 +10,7 @@ const Navbar = () => {
   const [activePath, setActivePath] = useState("");
 
   const { getCartSize } = useCart();
+
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {

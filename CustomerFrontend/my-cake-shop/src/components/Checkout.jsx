@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Loader2, ShoppingCart, CheckCircle } from "lucide-react";
 import { Form, Input, Select } from "antd";
 import "./Checkout.css";
+import { useCart } from "./CartContext";
 
 const { TextArea } = Input;
 
@@ -13,6 +14,7 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
   const navigate = useNavigate();
+  const { clearCart } = useCart();
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem("cart")) || {};
@@ -37,15 +39,20 @@ const Checkout = () => {
         address: values.address,
       }));
 
-      for (const order of orders) {
-        await axios.post("http://localhost:5000/api/customer/order", order);
-      }
+      // for (const order of orders) {
+      const res = await axios.post("http://localhost:5000/api/customer/order", {
+        orders,
+      });
+      // }
 
-      localStorage.removeItem("cart");
-      setShowOrderConfirmation(true);
-    } catch (error) {
-      console.error("Error placing orders:", error);
-      alert("Failed to place the orders. Please try again.");
+      
+      if (res.status === 200 || res.status === 201) {
+        setShowOrderConfirmation(true);
+        clearCart(); // This will clear both localStorage and state
+      }
+  //  }  catch (error) {
+  //     console.error("Error placing orders:", error);
+  //     alert("Failed to place the orders. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -84,13 +91,15 @@ const Checkout = () => {
       <div className="min-h-screen flex items-center justify-center bg-[#171718]">
         <div className="text-center text-white">
           <ShoppingCart className="w-16 h-16 mx-auto mb-4 text-[#8B7355]" />
-          <h2 className="text-2xl font-serif mb-2">Your cart is empty</h2>
-          <p className="text-gray-400 mb-4">
+          <h2 className="text-2xl cormorant-garamond-medium  mb-2">
+            Your cart is empty
+          </h2>
+          <p className="text-gray-400 mb-4 cormorant-garamond-medium ">
             Add some delicious cakes to your cart!
           </p>
           <button
-            onClick={() => navigate("/cakes")}
-            className="bg-[#8B7355] text-white px-6 py-2 rounded hover:bg-[#7A6548] transition-colors duration-300"
+            onClick={() => navigate("/shop")}
+            className="bg-[#8B7355] text-white cormorant-garamond-medium px-6 py-2 rounded hover:bg-[#7A6548] transition-colors duration-300"
           >
             Browse Cakes
           </button>
@@ -102,13 +111,15 @@ const Checkout = () => {
   return (
     <div className="min-h-screen bg-[#171718] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-4xl font-serif text-white mb-8 text-center">
+        <h2 className="text-4xl  text-white  cormorant-garamond-medium mb-8 text-center uppercase">
           Checkout
         </h2>
 
         <Form form={form} onFinish={handleSubmitOrder}>
           <div className="bg-[#1C1C1D] p-6 rounded-lg shadow-lg mb-8">
-            <h3 className="text-2xl font-serif text-white mb-4">Your Order</h3>
+            <h3 className="text-2xl cormorant-garamond-medium  text-white mb-4">
+              Your Order
+            </h3>
             {cart.map((cake, index) => (
               <div
                 key={index}
@@ -121,7 +132,7 @@ const Checkout = () => {
                     className="w-24 h-24 object-cover rounded"
                   />
                   <div className="flex-grow">
-                    <h4 className="text-xl font-serif text-white mb-2">
+                    <h4 className="text-xl jost-font text-white mb-2">
                       {cake.name}
                     </h4>
                     <p className="text-[#8B7355] mb-2">
@@ -166,8 +177,8 @@ const Checkout = () => {
                           style={selectStyle}
                           className="bg-[#2C2C2D] placeholder-slate-500 text-white"
                           dropdownStyle={{
-                            backgroundColor: "#2C2C2D",
-                            color: "white",
+                            backgroundColor: "#2C2C2D !important ",
+                            color: "white !important ",
                           }}
                         >
                           <Select.Option value="Birthday">
@@ -194,8 +205,8 @@ const Checkout = () => {
                           style={selectStyle}
                           className="bg-[#2C2C2D]  text-white"
                           dropdownStyle={{
-                            backgroundColor: "#2C2C2D",
-                            color: "white",
+                            backgroundColor: "#2C2C2D !important",
+                            color: "white !important",
                           }}
                         >
                           <Select.Option value="Veg">Veg</Select.Option>
@@ -210,7 +221,7 @@ const Checkout = () => {
           </div>
 
           <div className="bg-[#1C1C1D] p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-serif text-white mb-4">
+            <h3 className="text-2xl  text-white mb-4 cormorant-garamond-medium ">
               Customer Details
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
@@ -267,8 +278,11 @@ const Checkout = () => {
                 </>
               ) : (
                 <>
-                  <ShoppingCart className="w-5 h-5" />
-                  <span>Place Order</span>
+                  <ShoppingCart className="w-5 h-5 " />
+                  <span className="cormorant-garamond-medium">
+                    {" "}
+                    Place Order
+                  </span>
                 </>
               )}
             </button>
@@ -280,9 +294,7 @@ const Checkout = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-[#1C1C1D] p-8 rounded-lg text-center max-w-md w-full">
             <CheckCircle className="w-16 h-16 mx-auto mb-4 text-[#8B7355]" />
-            <h2 className="text-2xl font-serif text-white mb-4">
-              Order Confirmed!
-            </h2>
+            <h2 className="text-2xl  text-white mb-4">Order Confirmed!</h2>
             <p className="text-gray-400 mb-6">
               Your delicious cakes are being prepared with love and care. Thank
               you for your order! <br />

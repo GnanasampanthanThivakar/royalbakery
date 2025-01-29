@@ -45,7 +45,7 @@ const ContactUs = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-24">
             {/* Contact Form */}
             <div className="bg-[#1E1E1F] p-8 rounded-lg">
-              <h3 className="text-3xl font-serif mb-6 text-white cormorant-garamond-medium">
+              <h3 className="text-3xl  mb-6 text-white cormorant-garamond-medium">
                 Send Us a Message
               </h3>
               <form className="space-y-6">
@@ -95,7 +95,7 @@ const ContactUs = () => {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h3 className="text-3xl font-serif mb-6 text-white cormorant-garamond-medium">
+                <h3 className="text-3xl  mb-6 text-white cormorant-garamond-medium">
                   Get in Touch
                 </h3>
                 <p className="text-gray-400  mb-8">

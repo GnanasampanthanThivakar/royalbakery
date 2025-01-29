@@ -254,7 +254,7 @@ const Shop = () => {
 
                     {/* Price Tag */}
                     <div className="absolute top-4 right-4 bg-[#171718]/80 backdrop-blur-sm px-4 py-2 rounded-md">
-                      <span className="text-[#8B7355] font-serif">
+                      <span className="text-[#8B7355] ">
                         {cake.price} LKR
                       </span>
                     </div>
@@ -276,7 +276,7 @@ const Shop = () => {
 
                   {/* Details */}
                   <div className="text-center px-2">
-                    <h3 className="font-serif text-xl mb-3 text-white group-hover:text-[#8B7355] transition-colors duration-300">
+                    <h3 className=" text-xl mb-3 text-white group-hover:text-[#8B7355] transition-colors duration-300">
                       {cake.name}
                     </h3>
                     <p className="text-sm text-gray-400 line-clamp-2 mb-6">

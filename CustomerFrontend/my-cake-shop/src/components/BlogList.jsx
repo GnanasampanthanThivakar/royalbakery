@@ -12,6 +12,11 @@ const BlogList = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+
+
+
+ 
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -78,7 +83,7 @@ const BlogList = () => {
         <span className="inline-block text-sm tracking-[0.3em] uppercase cormorant-garamond-regular  text-[#8B7355] mb-4 px-4 py-2 border border-[#8B7355]/20">
           Our Stories
         </span>
-        <h1 className="cormorant-garamond-semibold uppercase text-4xl sm:text-5xl font-serif tracking-wider text-white mt-6 mb-4">
+        <h1 className="cormorant-garamond-semibold uppercase text-4xl sm:text-5xl  tracking-wider text-white mt-6 mb-4">
           Latest Blog Posts
         </h1>
         <div className="w-24 h-px bg-[#8B7355] mx-auto"></div>
@@ -116,7 +121,7 @@ const BlogList = () => {
                     </span>
                   </div>
 
-                  <h2 className="font-serif text-xl text-white mb-4 cormorant-garamond-semibold group-hover:text-[#8B7355] transition-colors duration-300">
+                  <h2 className=" text-xl text-white mb-4 cormorant-garamond-semibold group-hover:text-[#8B7355] transition-colors duration-300">
                     {blog.title}
                   </h2>
 

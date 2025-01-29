@@ -15,11 +15,11 @@ const SplitSection = () => {
           {/* Left Section - FLAVOUR */}
           <div className="text-center px-4 sm:px-6 group hover:transform hover:scale-105 transition-transform duration-500">
             <div className="mb-4 transform hover:-translate-y-1 transition-transform duration-300">
-              <span className="text-xs tracking-[0.3em] text-[#8B7355] inline-block animate-shimmer bg-gradient-to-r from-[#8B7355] via-[#9B8365] to-[#8B7355] bg-[length:200%_100%] bg-clip-text text-transparent">
+              <span className="text-xs tracking-[0.3em] cormorant-garamond-medium  text-[#8B7355] inline-block animate-shimmer bg-gradient-to-r from-[#8B7355] via-[#9B8365] to-[#8B7355] bg-[length:200%_100%] bg-clip-text text-transparent">
                 SWEET
               </span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-6 tracking-wider transform transition-all duration-500 hover:text-[#8B7355]">
+            <h2 className="cormorant-garamond-medium   text-2xl sm:text-3xl md:text-4xl mb-6 tracking-wider transform transition-all duration-500 hover:text-[#8B7355]">
               FLAVOUR
             </h2>
             <p className="text-white text-sm jost-font leading-8 mb-8 max-w-sm mx-auto opacity-90 hover:opacity-100 transition-opacity duration-300">
@@ -55,11 +55,11 @@ const SplitSection = () => {
           {/* Right Section - PROCESS */}
           <div className="text-center px-4 sm:px-6 group hover:transform hover:scale-105 transition-transform duration-500">
             <div className="mb-4 transform hover:-translate-y-1 transition-transform duration-300">
-              <span className="text-xs tracking-[0.3em] text-[#8B7355] inline-block animate-shimmer bg-gradient-to-r from-[#8B7355] via-[#9B8365] to-[#8B7355] bg-[length:200%_100%] bg-clip-text text-transparent">
+              <span className="text-xs cormorant-garamond-medium  tracking-[0.3em] text-[#8B7355] inline-block animate-shimmer bg-gradient-to-r from-[#8B7355] via-[#9B8365] to-[#8B7355] bg-[length:200%_100%] bg-clip-text text-transparent">
                 SWEET
               </span>
             </div>
-            <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl mb-6 tracking-wider transform transition-all duration-500 hover:text-[#8B7355]">
+            <h2 className=" text-2xl cormorant-garamond-medium   sm:text-3xl md:text-4xl mb-6 tracking-wider transform transition-all duration-500 hover:text-[#8B7355]">
               PROCESS
             </h2>
             <p className="text-white text-sm jost-font leading-8 mb-8 max-w-sm mx-auto opacity-90 hover:opacity-100 transition-opacity duration-300">
