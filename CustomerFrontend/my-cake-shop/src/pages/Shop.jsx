@@ -13,7 +13,7 @@ import { Input, Select, notification, Drawer, Radio } from "antd";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useCart } from "../components/CartContext";
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 
 const { Option } = Select;
 
@@ -108,12 +108,18 @@ const Shop = () => {
 
   return (
     <section className="bg-[#171718] py-24 min-h-screen mt-40">
-       <Helmet>
+      <Helmet>
         <title>Shop - Exquisite Cakes</title>
-        <meta name="description" content="Explore a variety of exquisite cakes at our shop." />
+        <meta
+          name="description"
+          content="Explore a variety of exquisite cakes at our shop."
+        />
         <meta name="keywords" content="cakes, shop, sweet treats, bakery" />
         <meta property="og:title" content="Shop - Exquisite Cakes" />
-        <meta property="og:description" content="Explore a variety of exquisite cakes at our shop." />
+        <meta
+          property="og:description"
+          content="Explore a variety of exquisite cakes at our shop."
+        />
         <meta property="og:image" content="URL-to-your-image" />
       </Helmet>
       <Navbar />
@@ -133,15 +139,15 @@ const Shop = () => {
         <div className="mb-8 flex flex-wrap gap-4 items-center justify-between">
           <div className="relative flex-1 min-w-[200px] max-w-md">
             <Input
-              placeholder="Search cakes..."
+              placeholder=""
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              prefix={<Search className="text-gray-400 w-4 h-4" />}
-              className="bg-[#1C1C1D] border-[#8B7355]/20 text-white rounded-md py-2 px-4"
+              prefix={<Search className="text-white w-4 h-4" />}
+              className="bg-[#1C1C1D] border-[#8B7355]/20 rounded-md py-2 px-4"
               style={{
                 backgroundColor: "#1C1C1D",
                 borderColor: "rgba(139, 115, 85, 0.2)",
-                color: "white",
+                color: "white", // Change text color
               }}
             />
           </div>
@@ -254,9 +260,7 @@ const Shop = () => {
 
                     {/* Price Tag */}
                     <div className="absolute top-4 right-4 bg-[#171718]/80 backdrop-blur-sm px-4 py-2 rounded-md">
-                      <span className="text-[#8B7355] ">
-                        {cake.price} LKR
-                      </span>
+                      <span className="text-[#8B7355] ">{cake.price} LKR</span>
                     </div>
 
                     {/* Add to Cart Button */}
@@ -276,10 +280,10 @@ const Shop = () => {
 
                   {/* Details */}
                   <div className="text-center px-2">
-                    <h3 className=" text-xl mb-3 text-white group-hover:text-[#8B7355] transition-colors duration-300">
+                    <h3 className=" text-xl mb-3 cormorant-garamond-medium text-white group-hover:text-[#8B7355] transition-colors duration-300">
                       {cake.name}
                     </h3>
-                    <p className="text-sm text-gray-400 line-clamp-2 mb-6">
+                    <p className="text-sm  text-gray-400 line-clamp-2 mb-6">
                       {cake.description}
                     </p>
                     <div className="w-12 h-px bg-[#8B7355]/30 mx-auto"></div>
