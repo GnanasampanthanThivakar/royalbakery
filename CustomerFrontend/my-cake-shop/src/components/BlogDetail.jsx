@@ -14,29 +14,29 @@ const BlogDetail = () => {
       try {
         setLoading(true);
         const response = await fetch(`http://localhost:5000/api/blogs/${id}`);
-        
+
         // Log the response status
-        console.log('Response status:', response);
-        
+        console.log("Response status:", response);
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data = await response.json();
-        console.log('Fetched blog data:', data); // Log the received data
-        
+        console.log("Fetched blog data:", data); // Log the received data
+
         if (!data) {
-          throw new Error('No data received');
+          throw new Error("No data received");
         }
-        
+
         setBlog(data);
         setError(null);
       } catch (error) {
         console.error("Detailed error:", error);
         setError(
-          error.response?.data?.message || 
-          error.message || 
-          "Failed to fetch blog post. Please try again later."
+          error.response?.data?.message ||
+            error.message ||
+            "Failed to fetch blog post. Please try again later."
         );
       } finally {
         setLoading(false);
@@ -49,11 +49,11 @@ const BlogDetail = () => {
   }, [id]);
 
   const formatDate = (dateString) => {
-    if (!dateString) return '';
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    if (!dateString) return "";
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
@@ -70,7 +70,7 @@ const BlogDetail = () => {
       <div className="min-h-screen bg-[#171718] flex flex-col justify-center items-center">
         <div className="text-red-400 mb-4">{error}</div>
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate("/")}
           className="flex items-center space-x-2 text-[#8B7355] hover:text-[#9B8365] transition-colors duration-300"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -85,7 +85,7 @@ const BlogDetail = () => {
       <div className="min-h-screen bg-[#171718] flex flex-col justify-center items-center">
         <div className="text-white mb-4">Blog post not found</div>
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate("/")}
           className="flex items-center space-x-2 text-[#8B7355] hover:text-[#9B8365] transition-colors duration-300"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -127,14 +127,13 @@ const BlogDetail = () => {
                 {formatDate(blog.createdAt)}
               </span>
               <span className="flex items-center">
-                <Clock className="w-4 h-4 mr-2" />
-                5 min read
+                <Clock className="w-4 h-4 mr-2" />5 min read
               </span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl  text-white mb-6">
+            <span className="text-3xl md:text-4xl  text-white mb-6">
               {blog.title}
-            </h1>
+            </span>
 
             <div className="prose prose-invert prose-lg max-w-none">
               <p className="text-gray-300 leading-relaxed whitespace-pre-line">

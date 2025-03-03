@@ -88,12 +88,12 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  
   const clearCart = () => {
-    setCart([]); // Clear state
-    localStorage.removeItem("cart"); // Clear local storage
+    setCart(initialCartState); // Reset cart to initial state
+    if (typeof localStorage !== "undefined") {
+      localStorage.removeItem("cart"); // Clear local storage
+    }
   };
-
 
   // const clearCart = () => {
   //   // Reset the cart state to its initial state

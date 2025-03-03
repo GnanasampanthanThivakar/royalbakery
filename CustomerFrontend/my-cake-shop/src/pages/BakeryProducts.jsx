@@ -54,9 +54,9 @@ const BakeryProducts = () => {
           <p className="text-[#D4AF37] uppercase tracking-wider">
             Our Fresh bakery Product is here
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif">
+          <span className="text-4xl md:text-5xl lg:text-6xl font-serif">
             Our Special <span className="text-[#D4AF37]">Product</span> For You
-          </h2>
+          </span>
 
           {/* Category Navigation */}
           <div className="flex flex-wrap justify-center gap-8 mt-12">

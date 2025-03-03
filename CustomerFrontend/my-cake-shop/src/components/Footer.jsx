@@ -89,11 +89,11 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex items-center space-x-3 text-gray-400">
                 <MapPin size={20} />
-                <span>123 Chava Street, NY 10001</span>
+                <span>219/2 kandy road chavakachcheri Jaffna 40000</span>
               </li>
               <li className="flex items-center space-x-3 text-gray-400">
                 <Phone size={20} />
-                <span>(+1) 718-999-0779</span>
+                <span>+94 77 614 6135</span>
               </li>
               <li className="flex items-center space-x-3 text-gray-400">
                 <Mail size={20} />

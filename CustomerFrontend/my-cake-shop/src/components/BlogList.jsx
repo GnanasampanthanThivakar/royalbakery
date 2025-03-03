@@ -4,18 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { Loader2, ArrowRight, CalendarDays } from "lucide-react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import heroImage from '../assets/dish.jpg';  // Adjust the path accordingly
-import { Helmet } from 'react-helmet-async';
+import heroImage from "../assets/dish.jpg"; // Adjust the path accordingly
+import { Helmet } from "react-helmet-async";
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-
-
-
- 
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -37,44 +32,69 @@ const BlogList = () => {
   }, []);
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
   return (
-    <div className="min-h-screen mt-40 bg-[#171718]">
-       <Helmet>
+    <div className="min-h-screen sm:mt-40 md:mt-20 lg:mt-40 bg-[#171718]">
+      <Helmet>
         <title>Royal Bakery Blog | Fresh Updates, Recipes, and More</title>
-        <meta name="description" content="Explore the Royal Bakery blog for delicious recipes, baking tips, the latest news, and updates from our bakery." />
-        <meta name="keywords" content="Royal Bakery blog, bakery recipes, baking tips, fresh bread, cake recipes, Royal Bakery updates, pastries, food blog" />
-        <meta property="og:title" content="Royal Bakery Blog | Fresh Updates, Recipes, and More" />
-        <meta property="og:description" content="Discover the latest recipes, tips, and updates from Royal Bakery on our blog." />
+        <meta
+          name="description"
+          content="Explore the Royal Bakery blog for delicious recipes, baking tips, the latest news, and updates from our bakery."
+        />
+        <meta
+          name="keywords"
+          content="Royal Bakery blog, bakery recipes, baking tips, fresh bread, cake recipes, Royal Bakery updates, pastries, food blog"
+        />
+        <meta
+          property="og:title"
+          content="Royal Bakery Blog | Fresh Updates, Recipes, and More"
+        />
+        <meta
+          property="og:description"
+          content="Discover the latest recipes, tips, and updates from Royal Bakery on our blog."
+        />
         <meta property="og:url" content="https://www.royalbakery.com/blog" />
         <meta property="og:type" content="website" />
-        <meta name="twitter:title" content="Royal Bakery Blog | Fresh Updates, Recipes, and More" />
-        <meta name="twitter:description" content="Stay updated with delicious recipes, baking tips, and bakery news at Royal Bakery." />
+        <meta
+          name="twitter:title"
+          content="Royal Bakery Blog | Fresh Updates, Recipes, and More"
+        />
+        <meta
+          name="twitter:description"
+          content="Stay updated with delicious recipes, baking tips, and bakery news at Royal Bakery."
+        />
       </Helmet>
 
-      <Navbar/>
-      
+      <Navbar />
+
       {/* Hero Section */}
-      <div className="relative h-96 sm:mt-30 md:mt-40 w-full">
+      <div className="relative h-96 sm:mt-20 md:mt-40 w-full">
         <div className="absolute inset-0">
           <img
-            src={heroImage}
             alt="Hero"
             className="w-full h-full object-cover"
+            style={{
+              backgroundImage: `url(${heroImage})`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              lazy: "true",
+              backgroundAttachment: "fixed",
+            }}
           />
           <div className="absolute inset-0 bg-black/20"></div>
         </div>
-        
+
         <div className="relative h-full flex flex-col justify-center items-center text-white">
-          <h1 className="text-4xl md:text-6xl cormorant-garamond-medium uppercase text-center max-w-2xl mb-6">
+          <span className="text-4xl md:text-6xl  cormorant-garamond-medium uppercase text-center max-w-2xl mb-6">
             Our Blog
-          </h1>
+          </span>
         </div>
       </div>
 
@@ -83,9 +103,9 @@ const BlogList = () => {
         <span className="inline-block text-sm tracking-[0.3em] uppercase cormorant-garamond-regular  text-[#8B7355] mb-4 px-4 py-2 border border-[#8B7355]/20">
           Our Stories
         </span>
-        <h1 className="cormorant-garamond-semibold uppercase text-4xl sm:text-5xl  tracking-wider text-white mt-6 mb-4">
+        <h2 className="cormorant-garamond-semibold uppercase text-4xl sm:text-5xl  tracking-wider text-white mt-6 mb-4">
           Latest Blog Posts
-        </h1>
+        </h2>
         <div className="w-24 h-px bg-[#8B7355] mx-auto"></div>
       </div>
 
@@ -121,9 +141,9 @@ const BlogList = () => {
                     </span>
                   </div>
 
-                  <h2 className=" text-xl text-white mb-4 cormorant-garamond-semibold group-hover:text-[#8B7355] transition-colors duration-300">
+                  <span className=" text-xl text-white mb-4 cormorant-garamond-semibold group-hover:text-[#8B7355] transition-colors duration-300">
                     {blog.title}
-                  </h2>
+                  </span>
 
                   <p className="text-gray-400 mb-6 line-clamp-3 cormorant-garamond-regular">
                     {blog.content}
@@ -143,7 +163,7 @@ const BlogList = () => {
         )}
       </div>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };

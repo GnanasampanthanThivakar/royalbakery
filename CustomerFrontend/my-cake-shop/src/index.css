@@ -63,12 +63,35 @@
   
 
 
-.jost-font {
-  font-family: "Jost", serif;
-  font-optical-sizing: auto;
-  font-weight: 200;
-  font-style: normal;
-}
+  .jost-font {
+    font-family: "Jost", serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    font-size: 16px; /* Default font size for larger screens */
+  }
+  
+  /* Mobile devices (max-width: 600px) */
+  @media (max-width: 600px) {
+    .jost-font {
+      font-size: 14px; /* Adjust font size for smaller screens */
+    }
+  }
+  
+  /* Tablets (min-width: 601px and max-width: 1024px) */
+  @media (min-width: 601px) and (max-width: 1024px) {
+    .jost-font {
+      font-size: 15px; /* Adjust font size for tablets */
+    }
+  }
+  
+  /* Large screens (min-width: 1025px) */
+  @media (min-width: 1025px) {
+    .jost-font {
+      font-size: 16px; /* Larger font size for desktops and larger screens */
+    }
+  }
+  
 .style-script-regular {
   font-family: "Style Script", serif;
   font-weight: 400;
@@ -88,4 +111,119 @@ p{
   background-color: unset;
   border: 1px solid #8B7355;
   color: antiquewhite;
+}
+.anticon {
+  color: #8B7355;
+}
+/* Change border and background color when checked */
+.ant-radio-checked .ant-radio-inner {
+  border-color: #8B7355 !important;
+  background-color: #8B7355 !important;
+}
+
+/* Change the small dot color inside the radio button */
+.ant-radio-checked .ant-radio-inner::after {
+  background-color: #8B7355 !important;
+}
+
+/* Change border color on hover */
+.ant-radio-wrapper:hover .ant-radio-inner {
+  border-color: #8B7355 !important;
+}
+
+/* Change unselected radio button border color */
+.ant-radio-inner {
+  border-color: rgba(139, 115, 85, 0.6) !important; /* Light brown for unselected */
+}
+
+/* Optional: Change the label text color */
+.ant-radio-wrapper {
+  color: white !important; /* Change text color */
+}
+
+
+
+.ant-input-affix-wrapper {
+  background-color: #1C1C1D !important;  /* Dark background */
+  border-color: rgba(139, 115, 85, 0.2) !important; /* Light brown border */
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  transition: border-color 0.3s ease-in-out;
+}
+
+/* Change border color on hover */
+.ant-input-affix-wrapper:hover {
+  border-color: #8B7355 !important; /* Brown border on hover */
+}
+
+/* Change border color on focus */
+.ant-input-affix-wrapper:focus-within {
+  border-color: #8B7355 !important;
+  box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.5) !important; /* Light glow effect */
+}
+
+/* Change input text color */
+.ant-input {
+  color: white !important; /* Text color */
+}
+
+/* Change placeholder text color */
+.ant-input::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important; /* Light gray placeholder */
+}
+
+
+/* Change border and background color */
+.ant-select-selector {
+  background-color: #1C1C1D !important; /* Dark background */
+  border-color: rgba(139, 115, 85, 0.2) !important; /* Brown border */
+  color: white !important; /* Text color */
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  transition: border-color 0.3s ease-in-out;
+}
+
+/* Change border color on hover */
+.ant-select-selector:hover {
+  border-color: #8B7355 !important;
+}
+
+/* Change border color on focus */
+.ant-select-focused .ant-select-selector {
+  border-color: #8B7355 !important;
+  box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.5) !important; /* Glow effect */
+}
+
+/* Dropdown menu background */
+.ant-select-dropdown {
+  background-color: #1C1C1D !important; /* Dark dropdown background */
+  border: 1px solid #8B7355 !important;
+}
+
+/* Change dropdown text color */
+.ant-select-item {
+  color: white !important;
+}
+
+/* Change selected dropdown item background */
+.ant-select-item-option-selected {
+  background-color: #8B7355 !important;
+  color: white !important;
+}
+
+/* Change dropdown item hover effect */
+.ant-select-item:hover {
+  background-color: rgba(139, 115, 85, 0.3) !important;
+}
+:where(.css-dev-only-do-not-override-nqoqt9) .ant-select-single:not(.ant-select-customize-input) .ant-select-selector
+{
+  background-color: #2C2C2D !important; /* Dark background */
+  border-color: rgba(139, 115, 85, 0.2) !important; /* Brown border */
+  color: white !important; /* Text color */
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  transition: border-color 0.3s ease-in-out;
+}
+.ant-select-selection-placeholder {
+  color: #6B7280 !important; /* Change placeholder color */
 }

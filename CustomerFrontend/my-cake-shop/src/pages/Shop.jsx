@@ -58,9 +58,11 @@ const Shop = () => {
         cake.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesPrice =
         priceRange === "all" ||
-        (priceRange === "under25" && cake.price < 25) ||
-        (priceRange === "25to50" && cake.price >= 25 && cake.price <= 50) ||
-        (priceRange === "over50" && cake.price > 50);
+        (priceRange === "under2500" && cake.price < 2500) ||
+        (priceRange === "2500to5000" &&
+          cake.price >= 2500 &&
+          cake.price <= 5000) ||
+        (priceRange === "over5000" && cake.price > 5000);
       return matchesSearch && matchesPrice;
     })
     .sort((a, b) => {
@@ -107,7 +109,7 @@ const Shop = () => {
   };
 
   return (
-    <section className="bg-[#171718] py-24 min-h-screen mt-40">
+    <section className="bg-[#171718] py-24 min-h-screen md:mt-10 lg:mt-40 ">
       <Helmet>
         <title>Shop - Exquisite Cakes</title>
         <meta
@@ -123,9 +125,9 @@ const Shop = () => {
         <meta property="og:image" content="URL-to-your-image" />
       </Helmet>
       <Navbar />
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container mx-auto  sm:px-6">
         {/* Elegant Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mt-10 mb-20">
           <span className="inline-block text-sm tracking-[0.3em] uppercase text-[#8B7355] mb-4 px-4 py-2 border border-[#8B7355]/20">
             Our Collection
           </span>
@@ -136,59 +138,43 @@ const Shop = () => {
         </div>
 
         {/* Search and Filter Section */}
-        <div className="mb-8 flex flex-wrap gap-4 items-center justify-between">
-          <div className="relative flex-1 min-w-[200px] max-w-md">
+        <div className="mb-8 flex flex-col sm:flex-row gap-4 items-center justify-between px-7 sm:px-0">
+          {/* Search Input */}
+          <div className="relative w-full sm:flex-1 min-w-[200px] max-w-md">
             <Input
-              placeholder=""
+              placeholder="Search cakes..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              prefix={<Search className="text-white w-4 h-4" />}
-              className="bg-[#1C1C1D] border-[#8B7355]/20 rounded-md py-2 px-4"
-              style={{
-                backgroundColor: "#1C1C1D",
-                borderColor: "rgba(139, 115, 85, 0.2)",
-                color: "white", // Change text color
-              }}
+              prefix={<Search className="text-white w-4 h-full" />}
+              className="bg-[#1C1C1D] rounded-md py-2 h-full px-4 w-full"
             />
           </div>
 
-          <div className="flex  gap-4 items-center">
-            <Select
-              defaultValue="name"
-              onChange={setSortBy}
-              className="w-40 "
-              style={{
-                backgroundColor: "#1C1C1D",
-                color: "white",
-              }}
-              dropdownStyle={{
-                backgroundColor: "#1C1C1D",
-                borderColor: "rgba(139, 115, 85, 0.2)",
-              }}
-            >
-              <Option value="name">Sort by Name</Option>
-              <Option value="price-asc">Price: Low to High</Option>
-              <Option value="price-desc">Price: High to Low</Option>
-            </Select>
+          {/* Sort and Filter Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            {/* Sort Dropdown - Hidden on Mobile */}
+            <div className="hidden sm:block">
+              <Select
+                defaultValue="name"
+                onChange={setSortBy}
+                className="w-full sm:w-40 h-full"
+              >
+                <Option value="name">Sort by Name</Option>
+                <Option value="price-asc">Price: Low to High</Option>
+                <Option value="price-desc">Price: High to Low</Option>
+              </Select>
+            </div>
 
+            {/* Filter Button - Full Width on Mobile */}
             <button
               onClick={() => setFilterDrawerVisible(true)}
-              className="bg-[#1C1C1D] border border-[#8B7355]/20 text-white px-4 py-2 rounded-md flex items-center gap-2 hover:bg-[#2C2C2D] transition-colors"
+              className="bg-[#1C1C1D] border border-[#8B7355]/20 text-white px-4 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-[#2C2C2D] transition-colors w-full sm:w-auto"
             >
               <SlidersHorizontal className="w-4 h-4" />
               Filters
             </button>
-
-            {/* <button
-              onClick={handleGoToCart}
-              className="bg-[#8B7355] hover:bg-[#9B8365] text-white px-4 py-2 rounded-md flex items-center gap-2 transition-colors"
-            >
-              <ShoppingBag className="w-4 h-4" />
-              Cart
-            </button> */}
           </div>
         </div>
-
         {/* Filter Drawer */}
         <Drawer
           title="Filter Cakes"
@@ -219,14 +205,14 @@ const Shop = () => {
                 <Radio value="all" className="text-white block">
                   All Prices
                 </Radio>
-                <Radio value="under25" className="text-white block">
-                  Under 25
+                <Radio value="under2500" className="text-white block">
+                  Under 2500
                 </Radio>
-                <Radio value="25to50" className="text-white block">
-                  25 - 50
+                <Radio value="2500to5000" className="text-white block">
+                  2500 - 5000
                 </Radio>
-                <Radio value="over50" className="text-white block">
-                  Over 50
+                <Radio value="over5000" className="text-white block">
+                  Over 5000
                 </Radio>
               </Radio.Group>
             </div>
@@ -280,9 +266,9 @@ const Shop = () => {
 
                   {/* Details */}
                   <div className="text-center px-2">
-                    <h3 className=" text-xl mb-3 cormorant-garamond-medium text-white group-hover:text-[#8B7355] transition-colors duration-300">
+                    <span className=" text-xl mb-3 cormorant-garamond-medium text-white group-hover:text-[#8B7355] transition-colors duration-300">
                       {cake.name}
-                    </h3>
+                    </span>
                     <p className="text-sm  text-gray-400 line-clamp-2 mb-6">
                       {cake.description}
                     </p>

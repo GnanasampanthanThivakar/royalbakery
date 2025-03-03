@@ -13,16 +13,16 @@ const SplitSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-center">
           {/* Left Section - FLAVOUR */}
-          <div className="text-center px-4 sm:px-6 group hover:transform hover:scale-105 transition-transform duration-500">
+          <div className="text-center px-4 sm:px-6 group hover:transform  transition-transform duration-500">
             <div className="mb-4 transform hover:-translate-y-1 transition-transform duration-300">
               <span className="text-xs tracking-[0.3em] cormorant-garamond-medium  text-[#8B7355] inline-block animate-shimmer bg-gradient-to-r from-[#8B7355] via-[#9B8365] to-[#8B7355] bg-[length:200%_100%] bg-clip-text text-transparent">
                 SWEET
               </span>
             </div>
-            <h2 className="cormorant-garamond-medium   text-2xl sm:text-3xl md:text-4xl mb-6 tracking-wider transform transition-all duration-500 hover:text-[#8B7355]">
+            <span className="cormorant-garamond-medium   text-2xl sm:text-3xl md:text-4xl mb-6 tracking-wider transform transition-all duration-500 hover:text-[#8B7355]">
               FLAVOUR
-            </h2>
-            <p className="text-white text-sm jost-font leading-8 mb-8 max-w-sm mx-auto opacity-90 hover:opacity-100 transition-opacity duration-300">
+            </span>
+            <p className="text-white  jost-font leading-8 mb-8 max-w-sm mx-auto opacity-90 hover:opacity-100 transition-opacity duration-300">
               It Is A Long Established Fact That A Reader Will Be Distracted By
               The Readable Content Of A Page When Looking At You. The Point Of
               Using Lorem Ipsum Is That It Has Making It Look Like Readable
@@ -53,20 +53,21 @@ const SplitSection = () => {
           </div>
 
           {/* Right Section - PROCESS */}
-          <div className="text-center px-4 sm:px-6 group hover:transform hover:scale-105 transition-transform duration-500">
-            <div className="mb-4 transform hover:-translate-y-1 transition-transform duration-300">
-              <span className="text-xs cormorant-garamond-medium  tracking-[0.3em] text-[#8B7355] inline-block animate-shimmer bg-gradient-to-r from-[#8B7355] via-[#9B8365] to-[#8B7355] bg-[length:200%_100%] bg-clip-text text-transparent">
+          <div className="text-center px-4 sm:px-6 group hover:transform  transition-transform duration-500">
+            <div className="mb-4 transform  transition-transform duration-300">
+              <span className="text-xs cormorant-garamond-medium   text-[#8B7355] inline-block animate-shimmer bg-gradient-to-r from-[#8B7355] via-[#9B8365] to-[#8B7355] bg-[length:200%_100%] bg-clip-text text-transparent">
                 SWEET
               </span>
             </div>
-            <h2 className=" text-2xl cormorant-garamond-medium   sm:text-3xl md:text-4xl mb-6 tracking-wider transform transition-all duration-500 hover:text-[#8B7355]">
+            <span className=" text-2xl cormorant-garamond-medium   sm:text-3xl md:text-4xl mb-6 tracking-wider transform transition-all duration-500 hover:text-[#8B7355]">
               PROCESS
-            </h2>
-            <p className="text-white text-sm jost-font leading-8 mb-8 max-w-sm mx-auto opacity-90 hover:opacity-100 transition-opacity duration-300">
-              It Is A Long Established Fact That A Reader Will Be Distracted By
-              The Readable Content Of A Page When Looking At You. The Point Of
-              Using Lorem Ipsum Is That It Has Making It Look Like Readable
-              English Dummy.
+            </span>
+            <p className="text-white  jost-font leading-8 mb-8 max-w-sm mx-auto opacity-90 hover:opacity-100 transition-opacity duration-300">
+              It is a well-known fact that a reader gets drawn to engaging
+              content when exploring a page. The purpose of using captivating
+              text is to make it visually appealing while maintaining
+              readability. Every detail matters in crafting an irresistible
+              experience.
             </p>
             <button
               onClick={handleReadmore}

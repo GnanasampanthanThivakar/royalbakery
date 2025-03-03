@@ -45,14 +45,13 @@ const Checkout = () => {
       });
       // }
 
-      
       if (res.status === 200 || res.status === 201) {
         setShowOrderConfirmation(true);
         clearCart(); // This will clear both localStorage and state
       }
-  //  }  catch (error) {
-  //     console.error("Error placing orders:", error);
-  //     alert("Failed to place the orders. Please try again.");
+      //  }  catch (error) {
+      //     console.error("Error placing orders:", error);
+      //     alert("Failed to place the orders. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -91,9 +90,9 @@ const Checkout = () => {
       <div className="min-h-screen flex items-center justify-center bg-[#171718]">
         <div className="text-center text-white">
           <ShoppingCart className="w-16 h-16 mx-auto mb-4 text-[#8B7355]" />
-          <h2 className="text-2xl cormorant-garamond-medium  mb-2">
+          <span className="text-2xl cormorant-garamond-medium  mb-2">
             Your cart is empty
-          </h2>
+          </span>
           <p className="text-gray-400 mb-4 cormorant-garamond-medium ">
             Add some delicious cakes to your cart!
           </p>
@@ -111,15 +110,15 @@ const Checkout = () => {
   return (
     <div className="min-h-screen bg-[#171718] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-4xl  text-white  cormorant-garamond-medium mb-8 text-center uppercase">
+        <h1 className="text-4xl  text-white  cormorant-garamond-medium mb-8 text-center uppercase">
           Checkout
-        </h2>
+        </h1>
 
         <Form form={form} onFinish={handleSubmitOrder}>
           <div className="bg-[#1C1C1D] p-6 rounded-lg shadow-lg mb-8">
-            <h3 className="text-2xl cormorant-garamond-medium  text-white mb-4">
+            <h1className="text-2xl cormorant-garamond-medium  text-white mb-4">
               Your Order
-            </h3>
+            </span>
             {cart.map((cake, index) => (
               <div
                 key={index}
@@ -132,9 +131,9 @@ const Checkout = () => {
                     className="w-24 h-24 object-cover rounded"
                   />
                   <div className="flex-grow">
-                    <h4 className="text-xl jost-font text-white mb-2">
+                    <span className="text-xl jost-font text-white mb-2">
                       {cake.name}
-                    </h4>
+                    </span>
                     <p className="text-[#8B7355] mb-2">
                       {cake.price.toFixed(2)} LKR
                     </p>
@@ -221,9 +220,9 @@ const Checkout = () => {
           </div>
 
           <div className="bg-[#1C1C1D] p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl  text-white mb-4 cormorant-garamond-medium ">
+            <span className="text-2xl  text-white mb-4 cormorant-garamond-medium ">
               Customer Details
-            </h3>
+            </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <Form.Item
                 name="customerName"
@@ -294,7 +293,7 @@ const Checkout = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-[#1C1C1D] p-8 rounded-lg text-center max-w-md w-full">
             <CheckCircle className="w-16 h-16 mx-auto mb-4 text-[#8B7355]" />
-            <h2 className="text-2xl  text-white mb-4">Order Confirmed!</h2>
+            <h1 className="text-2xl  text-white mb-4">Order Confirmed!</h1>
             <p className="text-gray-400 mb-6">
               Your delicious cakes are being prepared with love and care. Thank
               you for your order! <br />

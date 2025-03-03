@@ -29,6 +29,7 @@ const HeroSection = () => {
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             lazy: "true",
+            backgroundAttachment: "fixed",
           }}
         />
 
@@ -43,9 +44,9 @@ const HeroSection = () => {
           </div>
 
           {/* Main Title */}
-          <h1 className="text-6xl md:text-7xl uppercase cormorant-garamond-medium  tracking-wider mb-8">
+          <span className="text-6xl md:text-7xl uppercase cormorant-garamond-medium  tracking-wider mb-8">
             Taste the Magic of <br /> Fresh Bakes
-          </h1>
+          </span>
 
           {/* Shop Now Button */}
           <button

@@ -1,10 +1,18 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Trash2, ArrowLeft, ArrowRight, ShoppingBag, Minus, Plus } from "lucide-react";
+import {
+  Trash2,
+  ArrowLeft,
+  ArrowRight,
+  ShoppingBag,
+  Minus,
+  Plus,
+} from "lucide-react";
 import { useCart } from "./CartContext";
 
 const Cart = () => {
-  const { cart, removeFromCart, updateQuantityInCart, calculateSummary } = useCart();
+  const { cart, removeFromCart, updateQuantityInCart, calculateSummary } =
+    useCart();
   const navigate = useNavigate();
 
   const handleCheckout = () => {
@@ -18,8 +26,10 @@ const Cart = () => {
     return (
       <div className="min-h-screen bg-[#171718] flex flex-col items-center justify-center text-white">
         <ShoppingBag className="w-16 h-16 text-[#8B7355] mb-4" />
-        <h2 className="text-2xl  mb-4">Your cart is empty</h2>
-        <p className="text-gray-400 cormorant-garamond-medium mb-8">Add some delicious cakes to get started</p>
+        <span className="text-2xl  mb-4">Your cart is empty</span>
+        <p className="text-gray-400 cormorant-garamond-medium mb-8">
+          Add some delicious cakes to get started
+        </p>
         <button
           onClick={() => navigate("/")}
           className="flex items-center space-x-2 text-[#8B7355] hover:text-white transition-colors duration-300"
@@ -62,23 +72,31 @@ const Cart = () => {
                   />
                 </div>
                 <div className="flex-grow text-center sm:text-left">
-                  <h3 className="text-white  jost-font text-xl mb-2">{item.name}</h3>
-                  <p className="text-gray-400 text-sm mb-4">{item.description}</p>
+                  <span className="text-white  jost-font text-xl mb-2">
+                    {item.name}
+                  </span>
+                  <p className="text-gray-400 text-sm mb-4">
+                    {item.description}
+                  </p>
                   <div className="flex items-center justify-center sm:justify-start space-x-4">
-                    <span className="text-[#8B7355] ">
-                      {item.price} LKR
-                    </span>
+                    <span className="text-[#8B7355] ">{item.price} LKR</span>
                     <div className="flex items-center space-x-2">
                       <button
-                        onClick={() => updateQuantityInCart(item, item.quantity - 1)}
+                        onClick={() =>
+                          updateQuantityInCart(item, item.quantity - 1)
+                        }
                         className="text-gray-400 hover:text-white transition-colors duration-300"
                         aria-label="Decrease quantity"
                       >
                         <Minus className="w-4 h-4" />
                       </button>
-                      <span className="text-white w-8 text-center">{item.quantity}</span>
+                      <span className="text-white w-8 text-center">
+                        {item.quantity}
+                      </span>
                       <button
-                        onClick={() => updateQuantityInCart(item, item.quantity + 1)}
+                        onClick={() =>
+                          updateQuantityInCart(item, item.quantity + 1)
+                        }
                         className="text-gray-400 hover:text-white transition-colors duration-300"
                         aria-label="Increase quantity"
                       >
@@ -101,7 +119,9 @@ const Cart = () => {
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-[#1C1C1D] p-6 rounded-lg">
-              <h3 className="text-white jost-font text-xl mb-6">Order Summary</h3>
+              <span className="text-white jost-font text-xl mb-6">
+                Order Summary
+              </span>
               <div className="space-y-4">
                 <div className="flex justify-between text-gray-400">
                   <span>Subtotal</span>

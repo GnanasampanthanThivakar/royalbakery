@@ -112,9 +112,7 @@ const CakeList = () => {
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
                     <div className="absolute top-4 right-4 bg-[#171718]/80 backdrop-blur-sm px-4 py-2 rounded-md">
-                      <span className="text-[#8B7355] ">
-                        {cake.price} LKR{" "}
-                      </span>
+                      <span className="text-[#8B7355] ">{cake.price} LKR </span>
                     </div>
                     <button
                       onClick={() => handleAddToCart(cake)}
@@ -132,9 +130,9 @@ const CakeList = () => {
 
                   {/* Details */}
                   <div className="text-center px-2">
-                    <h3 className=" text-xl cormorant-garamond-semibold mb-3 text-white group-hover:text-[#8B7355] transition-colors duration-300">
+                    <span className=" text-xl cormorant-garamond-semibold mb-3 text-white group-hover:text-[#8B7355] transition-colors duration-300">
                       {cake.name}
-                    </h3>
+                    </span>
                     <p className="text-sm cormorant-garamond-semibold  text-gray-400 line-clamp-2 mb-6">
                       {cake.description}
                     </p>

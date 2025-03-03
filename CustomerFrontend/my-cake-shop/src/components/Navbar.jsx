@@ -98,7 +98,7 @@ const Navbar = () => {
                   activePath === "/" ? "border border-[#8B7355]" : ""
                 }`}
               >
-                <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
+                <span className="relative z-10 transition-colors text-base jost-font duration-300 group-hover:text-white">
                   HOME
                 </span>
                 <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -109,7 +109,7 @@ const Navbar = () => {
                   activePath === "/aboutus" ? "border border-[#8B7355]" : ""
                 }`}
               >
-                <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
+                <span className="relative z-10 transition-colors text-base jost-font duration-300 group-hover:text-white">
                   ABOUT
                 </span>
                 <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -120,12 +120,12 @@ const Navbar = () => {
                   activePath === "/shop" ? "border border-[#8B7355]" : ""
                 }`}
               >
-                <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
+                <span className="relative z-10 transition-colors text-base jost-font duration-300 group-hover:text-white">
                   SHOP
                 </span>
                 <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
               </Link>
-              <Link to="/" className="hidden md:block px-16">
+              <Link to="/" className="hidden md:block ">
                 <img
                   src={logo}
                   alt="Sweet Cream Logo"
@@ -140,7 +140,7 @@ const Navbar = () => {
                   activePath === "/blog" ? "border border-[#8B7355]" : ""
                 }`}
               >
-                <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
+                <span className="relative z-10 text-base transition-colors jost-font duration-300 group-hover:text-white">
                   BLOG
                 </span>
                 <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -151,7 +151,7 @@ const Navbar = () => {
                   activePath === "/contact" ? "border border-[#8B7355]" : ""
                 }`}
               >
-                <span className="relative z-10 transition-colors jost-font duration-300 group-hover:text-white">
+                <span className="relative text-base  z-10 transition-colors jost-font duration-300 group-hover:text-white">
                   CONTACT
                 </span>
                 <div className="absolute inset-0 bg-[#8B7355] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
@@ -160,7 +160,7 @@ const Navbar = () => {
           </div>
 
           {/* Cart Button */}
-          <div className="relative flex items-center ml-10">
+          <div className="relative flex items-center lg:ml-10">
             <Link
               to="/cart"
               className="relative flex items-center justify-center"
